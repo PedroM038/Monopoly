@@ -1,0 +1,7 @@
+/**
+ * Dice
+ */
+public class Dice {
+
+    
+}

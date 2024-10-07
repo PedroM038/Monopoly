@@ -1,0 +1,7 @@
+/**
+ * Property
+ */
+public class Property {
+
+    
+}

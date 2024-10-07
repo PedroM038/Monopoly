@@ -1,0 +1,7 @@
+/**
+ * Space
+ */
+public class Space {
+
+    
+}

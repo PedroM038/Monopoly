@@ -1,0 +1,7 @@
+/**
+ * Player
+ */
+public class Player {
+
+    
+}
