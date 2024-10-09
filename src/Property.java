@@ -3,28 +3,37 @@
  */
 public class Property {
 	private String name;
-	private int[] values;
-	private int houses;
+	private short[] values;
+	private short level;
+	private short ownerId;
     
-	public Property(String name, int values[], int houses) {
+	public Property(String name, int values[], int level) {
 		this.name = name;
 		this.values = values;
-		this.houses = houses;
+		this.level = level;
 	}
 
-        public int getValue(int level) {
-                return this.value[level];
+        public short getValue(int level) {
+            return this.value[level];
         }
 
         public String getName() {
-                return this.name;
+            return this.name;
         }
 
-        public int getHouses() {
-                return this.houses;
+        public short getLevel() {
+            return this.level;
         }
 
-        public void setHouses(int houses) {
-                this.houses = houses;
+        public void setLevel(int level) {
+            this.level = level;
         }
+
+		public short getOwnerId() {
+			return this.ownerId;
+		}
+
+		public void setOwnerId(short ownerId) {
+			this.ownerId = ownerId;
+		}
 }
