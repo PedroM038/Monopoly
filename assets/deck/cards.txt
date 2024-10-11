@@ -1,0 +1,40 @@
+Avance até o Início,mover,0,Sorte
+Receba R$200 ao passar pelo Início,receber,200,Sorte
+Pague a manutenção de suas propriedades,pagar,100,Revés
+Avance 3 casas,mover,3,Sorte
+Vá para a cadeia,mover,-1,Revés
+Receba uma herança de um parente distante,receber,150,Sorte
+Pague multa de estacionamento,pagar,50,Revés
+Vá até o banco e receba um empréstimo de R$100,receber,100,Sorte
+Você foi pego falsificando bilhetes de transporte,pagar,100,Revés
+Avance até a Estação Ferroviária mais próxima,mover,5,Sorte
+Pague R$200 de taxas de imposto,pagar,200,Revés
+Receba um prêmio na loteria,receber,500,Sorte
+Seus investimentos em ações caíram,pagar,150,Revés
+Avance até a próxima propriedade disponível,mover,6,Sorte
+Pague por danos acidentais a uma loja,pagar,75,Revés
+Você vendeu uma obra de arte rara,receber,300,Sorte
+Vá até o ponto de ônibus mais próximo e mova-se 2 casas,mover,2,Sorte
+Pague uma conta médica,pagar,150,Revés
+Receba um bônus de R$100 por boa conduta,receber,100,Sorte
+Seus vizinhos processaram você por barulho,pagar,50,Revés
+Avance até a rua principal,mover,8,Sorte
+Pague R$25 por estacionar em local proibido,pagar,25,Revés
+Sua empresa teve lucros extraordinários,receber,250,Sorte
+Pague uma dívida de cartão de crédito,pagar,150,Revés
+Ganhe um concurso de culinária,receber,200,Sorte
+Você foi multado por excesso de velocidade,pagar,75,Revés
+Avance 4 casas,mover,4,Sorte
+Pague a manutenção da sua casa,pagar,100,Revés
+Ganhe um prêmio em um concurso de fotografia,receber,100,Sorte
+Seus encanamentos quebraram,pagar,200,Revés
+Avance para a casa de qualquer outro jogador,mover,10,Sorte
+Pague pelos reparos de um acidente de trânsito,pagar,100,Revés
+Receba R$50 como presente de aniversário,receber,50,Sorte
+Pague por consertos na sua bicicleta,pagar,50,Revés
+Avance até a companhia de energia elétrica,mover,12,Sorte
+Você foi assaltado,pagar,200,Revés
+Receba R$100 de um reembolso de impostos,receber,100,Sorte
+Pague R$50 por danos a um carro alugado,pagar,50,Revés
+Receba um bônus salarial,receber,150,Sorte
+Pague R$75 por serviços de consultoria,pagar,75,Revés
