@@ -1,6 +1,5 @@
-/**
- * Game
- */
+package controller;
+
 public class Game {
 
     

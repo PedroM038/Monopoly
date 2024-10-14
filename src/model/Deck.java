@@ -1,3 +1,5 @@
+package model;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -6,8 +8,8 @@ import java.util.Collections;
 
 public class Deck{
 
-    private ArrayList<Card> cards;
-    private String type;
+    private final ArrayList<Card> cards;
+    private final String type;
 
     public Deck(String type){
         this.cards = new ArrayList<>();

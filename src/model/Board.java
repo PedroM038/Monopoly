@@ -1,6 +1,5 @@
-/**
- * Board
- */
+package model;
+
 public class Board {
 
     

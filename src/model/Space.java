@@ -1,6 +1,5 @@
-/**
- * Space
- */
+package model;
+
 public class Space {
 
     
