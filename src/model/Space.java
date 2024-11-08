@@ -20,5 +20,5 @@ public class Space {
         return this.type;
     }
 
-	abstract void action();
+    abstract void action();
 }
