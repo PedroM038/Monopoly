@@ -85,6 +85,7 @@ public class Property {
 		}
 		this.numHouses += 1;
 		this.owner.pay(this.housePrice);
+		return true;
 	}
 
 
