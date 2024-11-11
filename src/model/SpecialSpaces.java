@@ -3,15 +3,14 @@ package model;
 public class SpecialSpaces extends Space {
 
     //gets a chance card from the deck and executes it
-    public void action(Deck chance, Player player) {
-        Card card = chance.drawCard;
-        System.out.println(card.getDescription);
-        card.applyEffect(player);
+    public void action(Bank bank, Player player) {
+        Card card = bank.drawCard(player);
+		System.out.println(card.getDescription());
     }
 
     //Start space: player earns 200
     public void action(Player player, Bank bank) {
-        bank.player(player, 200);
+        bank.pay(player, 200);
     }
 
     //Go to prision space
