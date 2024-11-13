@@ -29,19 +29,5 @@ public class Card {
     public String getType() {
         return type;
     }
-
-    public void applyEffect(Player player){
-        switch (action) {
-            case "pagar" -> /*método para subtrair dinheiro do player (Player Class)*/
-                /*player.decreaseBalance(amoount);*/
-                System.out.println( /*player.getName() + */" pagou R$" + amount);
-            case "receber" -> /*método para somar dinheiro do player (Player Class)*/
-                /*player.increaseBalance(amoount);*/
-                System.out.println( /*player.getName() + */" recebeu R$" + amount);
-            case "mover" -> /*método para mover o player*/
-                /*player.moveTo(amoount);*/
-                System.out.println( /*player.getName() + */" foi movido para" + amount);
-        }
-    }
 }
 

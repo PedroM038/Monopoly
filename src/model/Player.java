@@ -5,17 +5,16 @@ import java.util.List;
 
 public class Player {
     private String name;
+    private int id;
     private int money;
     private List<Property> properties;
-    private boolean inJail;
-    private int position;  
+    private int jailTime;  // how  much time should be in jail
 
-    public Player(String name, int initialMoney) {
+    public Player(String name, int id, int initialMoney) {
         this.name = name;
         this.money = initialMoney;
         this.properties = new ArrayList<>();
-        this.inJail = false;
-        this.position = 0; //initial space
+        this.jailTime = 0;
     }
 
     public boolean buyProperty(Property property) {
@@ -33,9 +32,18 @@ public class Player {
         }
         return false;
     }
+
+    public void receiveCard(Card card) {
+        if card.getType().equals("Sorte") {
+            this.money = Math.max(0, this.money - card.getAmount());
+        }
+        else {
+            this.money += card.getAmount();
+        }
+    }
  
     public boolean isInJail() {
-        return inJail;
+        return this.jailTime != 0;
     }
 
     // Método para calcular o valor total das propriedades possuídas
@@ -47,6 +55,8 @@ public class Player {
         return totalAssets;
     }
 
+
+    // GETTERS
     public String getName() {
         return name;
     }
@@ -57,18 +67,6 @@ public class Player {
 
     public List<Property> getProperties() {
         return properties;
-    }
-
-    public int getPosition() {
-        return position;
-    }
-
-    // Método para exibir as propriedades possuídas
-    public void showProperties() {
-        System.out.println(name + "'s Properties:");
-        for (Property property : properties) {
-            System.out.println("- " + property.getName());
-        }
     }
 }
 
