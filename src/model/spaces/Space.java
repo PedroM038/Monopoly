@@ -1,4 +1,4 @@
-package model;
+package spaces;
 
 public class Space {
     private String name;

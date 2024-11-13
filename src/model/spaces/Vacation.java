@@ -1,4 +1,4 @@
-package model;
+package spaces;
 
 public class Vacation extends SpecialSpaces {
     int[] lazy = new int[8];

@@ -1,4 +1,4 @@
-package model;
+package assets;
 
 public class Card {
 
