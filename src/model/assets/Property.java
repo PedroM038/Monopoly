@@ -11,7 +11,6 @@ public class Property {
 	private int houseValue;  // how much each house adds to rent
 	private int mortgagePrice;
 	private boolean isMortgaged;
-	private Player owner;
 	private int baseRent;
     
 	public Property(String name, int price, int housePrice, int houseValue, int mortgagePrice, int baseRent) {
@@ -22,7 +21,6 @@ public class Property {
 		this.houseValue = houseValue;
 		this.mortgagePrice = mortgagePrice;
 		this.isMortgaged = false;
-		this.owner = null;
 		this.baseRent = baseRent;  // rent when there's no houses/hotels
 	}
 
@@ -38,54 +36,27 @@ public class Property {
 	}
 
 	// price of rent
-	public int totalRentValue() {
+	public int getRentValue() {
 		return this.baseRent + this.numHouses * this.houseValue;
 	}
 
-	// Player p buys house
-	// obs: returns false if cant buy house
-    public boolean buy(Player p) {
-		if (p.getMoney() < this.getActualPrice() || this.owner != null || this.owner == p) {
-			return false;
-		}
-		this.owner = p;
-		p.pay(this.getActualPrice());
-		if (this.isMortgaged) {
-			this.isMortgaged = false;
-		}
-		return true;
+	// buy property
+	public void buy() {
+		this.isMortgaged = false;
 	}
 
-	// sells property
-	// obs: returns false if cant sell house
-	public boolean sell() {
-		if (this.owner == null) {
-			return false;
-		}
+	// sell property
+	public void sell() {
 		this.isMortgaged = true;
-		this.owner.earn(this.getActualPrice());
-		this.owner = null;
 		this.numHouses = 0;
-		return true;
-	}
-
-	// player p pays rent
-	public void applyRent(Player p) {
-		if (this.owner == p) {
-			return;
-		}
-		p.pay(this.totalRentValue());
 	}
 
 	// owner buys a house
-	// returns false if cant buy houses
-	public boolean buyHouse() {
-		if (this.owner == null || this.owner.getMoney() < this.housePrice || this.numHouses == this.MAX_NUM_HOUSES) {
-			return false;
+	public void buyHouse() {
+		if (this.numHouses == this.MAX_NUM_HOUSES) {
+			throw new ArithmeticException("Property has max number of houses already.");
 		}
 		this.numHouses += 1;
-		this.owner.pay(this.housePrice);
-		return true;
 	}
 
 
@@ -106,6 +77,10 @@ public class Property {
         return this.numHouses;
     }
 
+	public int getMaxNumHouses() {
+		return this.MAX_NUM_HOUSES;
+	}
+
     public int getHouseValue() {
         return this.houseValue;
     }
@@ -116,10 +91,6 @@ public class Property {
 
     public boolean isMortgaged() {
         return this.isMortgaged;
-    }
-
-    public Player getOwner() {
-        return this.owner;
     }
 
     public int getBaseRent() {

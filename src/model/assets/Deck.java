@@ -8,19 +8,15 @@ import java.util.Collections;
 
 public class Deck{
 
-    private final ArrayList<Card> cards;
-    private final String type;
+    private ArrayList<Card> cards;
+    private int numDrawnCards; 
 
-    public Deck(String type){
+    public Deck(){
         this.cards = new ArrayList<>();
-        this.type = type;
-    }
-
-    public String getType(){
-        return type;
     }
 
     public void loadCardsFromFile(String filename){
+        this.numDrawnCards = 0;
         try(BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line;
             while((line = br.readLine()) != null){
@@ -30,13 +26,12 @@ public class Deck{
                 int amount = Integer.parseInt(parts[2]);
                 String cardType = parts[3];
 
-                if(this.type.equals(cardType)) {
-                    cards.add(new Card(description, action, amount, cardType));
-                }
+                this.cards.add(new Card(description, action, amount, cardType));
             }
         } catch (IOException e) {
             System.out.println("Erro ao ler o arquivo " + e.getMessage());
         }
+        this.shuffle();
     }
 
     public void shuffle(){
@@ -44,14 +39,12 @@ public class Deck{
     }
 
     public Card drawCard(){
-        if(cards.isEmpty()){
-            resetDeck();
+        if(this.numDrawnCards == this.cards.size()){
+            this.shuffle();
         }
-        return cards.remove(0);
-    }
-
-    public void resetDeck(){
-        System.out.println("Reembaralhando o baralho...");
-        shuffle();
+        Card card = this.cards.remove(0);
+        this.cards.add(card);
+        this.numDrawnCards += 1;
+        return card;
     }
 }
