@@ -5,7 +5,6 @@ public class PropertySpace extends Space {
     private int ownerId;
     public PropertySpace(Property property) {
         this.description = property.getName();
-        this.type = SpaceConstants.PROPERTY_SPACE_TYPE;
         this.property = property;
         this.ownerId = -1;  // -1 means no owner 
     }
