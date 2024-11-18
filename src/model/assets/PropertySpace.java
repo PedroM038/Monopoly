@@ -9,6 +9,22 @@ public class PropertySpace extends Space {
         this.ownerId = -1;  // -1 means no owner 
     }
 
+    public void buyProperty(int ownerId) {
+        if (this.hasOwner()) {
+            throw new ArithmeticException("Property already has owner.");
+        }
+        this.ownerId = ownerId;
+        this.property.buy();
+    }
+
+    public void sellProperty() {
+        if (!this.hasOwner()) {
+            throw new ArithmeticException("Property does not have an owner.");
+        }
+        this.ownerId = -1;
+        this.property.sell();
+    }
+
     public boolean hasOwner() {
         return this.ownerId != -1;
     }

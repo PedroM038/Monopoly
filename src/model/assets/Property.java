@@ -43,6 +43,7 @@ public class Property {
 	// buy property
 	public void buy() {
 		this.isMortgaged = false;
+		this.numHouses = 0;
 	}
 
 	// sell property
@@ -53,10 +54,14 @@ public class Property {
 
 	// owner buys a house
 	public void buyHouse() {
-		if (this.numHouses == this.MAX_NUM_HOUSES) {
+		if (this.hasAllHouses()) {
 			throw new ArithmeticException("Property has max number of houses already.");
 		}
 		this.numHouses += 1;
+	}
+
+	public boolean hasAllHouses() {
+		return this.numHouses == this.MAX_NUM_HOUSES;
 	}
 
 
