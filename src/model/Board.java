@@ -21,7 +21,6 @@ public class Board {
             this.spaces.add(new Space());
         }
         this.spaces.set(prisonId, new PrisonSpace());
-        // TO-DO: open file and stuff
         ArrayList<Property> properties = this.loadProperties("../../assets/properties.txt");
         for (int pos = 0; pos < propertiesId.size(); pos++) {
             this.spaces.set(propertiesId.get(pos), new PropertySpace(properties.get(pos)));
@@ -29,6 +28,7 @@ public class Board {
         for (Integer i: cardsId) {
             this.spaces.set(i, new CardSpace());
         }
+        // TO-DO: money spaces file
         for (Integer i: moneyId) {
             this.spaces.set(i, new MoneySpace("AAAAAAAA", 50));
         }

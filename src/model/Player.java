@@ -5,68 +5,76 @@ import java.util.List;
 
 public class Player {
     private String name;
-    private int id;
+    private String color;
     private int money;
     private List<Property> properties;
-    private int jailTime;  // how  much time should be in jail
+    private boolean isLocked;
 
-    public Player(String name, int id, int initialMoney) {
+    public Player(String name, String color, int id, int initialMoney) {
         this.name = name;
+        this.color = color;
         this.money = initialMoney;
         this.properties = new ArrayList<>();
-        this.jailTime = 0;
+        this.isLocked = false;;
     }
 
-    public boolean buyProperty(Property property) {
-        if (this.money >= property.getActualPrice() && property.buy(this)) {
-            properties.add(property);
-            return true;
-        }
-        return false;
+    public void buyProperty(Property property) {
+        properties.add(property);
+        property.buy();
     }
 
     public boolean sellProperty(Property property) {
-        if (properties.contains(property) && property.sell()) {
-            properties.remove(property);
-            return true;
-        }
-        return false;
+        properties.remove(property);
+        property.sell();
     }
 
-    public void receiveCard(Card card) {
-        if card.getType().equals("Sorte") {
-            this.money = Math.max(0, this.money - card.getAmount());
-        }
-        else {
-            this.money += card.getAmount();
-        }
+    public void lock() {
+        this.isLocked = true;
     }
- 
-    public boolean isInJail() {
-        return this.jailTime != 0;
+
+    public void free() {
+        this.isLocked = false;
     }
 
     // Método para calcular o valor total das propriedades possuídas
     public int getTotalAssets() {
         int totalAssets = this.money;
         for (Property property : properties) {
-            totalAssets += property.getPrice();
+            totalAssets += property.getMortgagePrice();
         }
         return totalAssets;
+    }
+
+    // gains money
+    public void remunerate(int money) {
+        this.money += money;
+    }
+
+    // loses money
+    public void pay(int money) {
+        this.money -= money;
     }
 
 
     // GETTERS
     public String getName() {
-        return name;
+        return this.name;
+    }
+
+    public String getColor() {
+        return this.color;
     }
 
     public int getMoney() {
-        return money;
+        return this.money;
     }
 
     public List<Property> getProperties() {
-        return properties;
+        return this.properties;
+    }
+
+    public isLocked() {
+        return this.isLocked;
     }
 }
 
