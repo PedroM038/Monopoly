@@ -10,7 +10,7 @@ public class Player {
     private List<Property> properties;
     private boolean isLocked;
 
-    public Player(String name, String color, int id, int initialMoney) {
+    public Player(String name, String color, int initialMoney) {
         this.name = name;
         this.color = color;
         this.money = initialMoney;

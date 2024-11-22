@@ -8,37 +8,40 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Board {
-    private ArrayList<Space> spaces;
-    private ArrayList<Integer> playersPos;
+    private Space[] spaces;
+    private int[] playersPos;
 
-    public Board(int boardSize, int numPlayers, int prisonId, ArrayList<Integer>propertiesId, ArrayList<Integer>cardsId, ArrayList<Integer>moneyId) {
-        this.spaces = new ArrayList<Space>(boardSize);
-        this.playersPos = new ArrayList<Integer>(numPlayers);
+    public Board(int boardSize, int numPlayers, int prisonId, int[] propertiesId, int[] cardsId, int[] moneyId) {
+        this.spaces = new Space[boardSize];
+        this.playersPos = new int[numPlayers];
         for (int i = 0; i < numPlayers; i++) {
-            this.playersPos.add(0);
+            this.playersPos[i] = 0;
         }
         for (int i = 0; i < boardSize; i++) {
-            this.spaces.add(new Space());
+            this.spaces[i] = new Space();
         }
-        this.spaces.set(prisonId, new PrisonSpace());
-        ArrayList<Property> properties = this.loadProperties("../../assets/properties.txt");
-        for (int pos = 0; pos < propertiesId.size(); pos++) {
-            this.spaces.set(propertiesId.get(pos), new PropertySpace(properties.get(pos)));
+
+        this.spaces[prisonId] = new PrisonSpace();
+
+        Property[] properties = this.loadProperties("../../assets/properties.txt");
+        for (int i = 0; i < propertiesId.size(); i++) {
+            this.spaces[propertiesId[i]] = new PropertySpace(properties[pos]);
         }
-        for (Integer i: cardsId) {
-            this.spaces.set(i, new CardSpace());
+
+        for (int i = 0; i < cardsId.size(); i++) {
+            this.spaces[cardsId[i]] = new CardSpace();
         }
-        // TO-DO: money spaces file
-        for (Integer i: moneyId) {
-            this.spaces.set(i, new MoneySpace("AAAAAAAA", 50));
+
+        MoneySpace[] moneySpaces = this.loadMoneySpaces("../../assets/money_spaces.txt");
+        for (int i = 0; i < moneyId.size(); i++) {
+            this.spaces[moneyId[i]] = moneySpaces[i];
         }
     }
 
-    public ArrayList<Property> loadProperties(String filename) {
+    public Property[] loadProperties(String filename) {
         ArrayList<Property> properties = new ArrayList<Property>();
         try(BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line;
-            // String name, int price, int housePrice, int houseValue, int mortgagePrice, int baseRent
             while((line = br.readLine()) != null){
                 String[] parts = line.split(",");
                 String name = parts[0];
@@ -53,20 +56,37 @@ public class Board {
         } catch (IOException e) {
             System.out.println("Erro ao ler o arquivo " + e.getMessage());
         }
-        return properties;
+        return properties.toArray();
+    }
+
+    public MoneySpace[] loadMoneySpaces(String filename) {
+        ArrayList<MoneySpace> moneySpaces = new ArrayList<MoneySpace>();
+        try(BufferedReader br = new BufferedReader(new FileReader(filename))) {
+            String line;
+            while((line = br.readLine()) != null){
+                String[] parts = line.split(",");
+                String name = parts[0];
+                int value = Integer.parseInt(parts[1]);
+
+                moneySpaces.add(new MoneySpace(name, price));
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao ler o arquivo " + e.getMessage());
+        }
+        return moneySpaces.toArray();
     }
 
     public void movePlayer(int playerId, int moves) {
-        this.playersPos.set(playerId, (this.playersPos.get(playerId) + moves) % this.getBoardSize());
+        this.playersPos.set(playerId, (this.playersPos[playerId] + moves) % this.getBoardSize());
     }
 
     // if players moves, does it passes through the start space
     public boolean goesThroughStart(int playerId, int moves) {
-        return this.playersPos.get(playerId) + moves >= this.getBoardSize();
+        return this.playersPos[playerId] + moves >= this.getBoardSize();
     }
 
     public Space getPlayerSpace(int playerId) {
-        return this.getSpace(this.playersPos.get(playerId));
+        return this.getSpace(this.playersPos[playerId]);
     }
 
     public Space getSpace(int id) {
@@ -81,6 +101,6 @@ public class Board {
     }
 
     public int getPlayerPos(int playerId) {
-        return this.playersPos.get(playerId);
+        return this.playersPos[playerId];
     }
 }
