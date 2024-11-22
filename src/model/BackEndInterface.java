@@ -8,11 +8,13 @@ public class BackEndInterface {
     private ArrayList<Player> players;
     private Board board;
     private Deck deck;
-    private Dice dices[2];
+    private Dice dice;
     private Bank banker;
     private JailGuard guard;
     private int maxTurns;
     private ArrayList<Integer>playerOrder;
+
+    private int nextPlayerId;
 
     public BackEndInterface(int numPlayers, ArrayList<String> playersName, ArrayList<String> playersColors, int maxTurns) {
         this.players = new ArrayList<Player>();
@@ -22,9 +24,7 @@ public class BackEndInterface {
         this.board = new Board(?????);
         this.deck = new Deck();
         deck.loadCardsFromFile("../../assets/deck/cards.txt");
-        this.dices = new Dice[2];
-        this.dices[0] = new Dice(6);
-        this.dices[1] = new Dice(6);
+        this.dice = new Dice(6);
 
         this.banker = new Bank();
         this.guard = new JailGuard(numPlayers, GameConstants.JAIL_BAIL_VALUE);
@@ -33,4 +33,57 @@ public class BackEndInterface {
 
         this.playerOrder = new ArrayList<Integer>();
     }
+
+    public ArrayList<Integer> rollDices() {
+        ArrayList<Integer> result = new ArrayList<Integer>();
+        result.add(Integer.valueOf(this.dice.roll()));
+        result.add(Integer.valueOf(this.dice.roll()));
+        return result;
+    }
+
+    public int totalDiceResult(ArrayList<Integer> diceResults)
+
+    public void definePlayerOrder(ArrayList<Integer>playersResults) {
+        return;
+    }
+
+    public Info moveNextPlayer(ArrayList<Integer> diceResults) {
+        return;
+    }
+
+    public void buyProperty() {
+        return;
+    }
+
+    public void buyHouse() {
+        return;
+    }
+
+    public void sellProperty() {
+        return;
+    }
+
+    public void bailFromJail() {
+        return;
+    }
+
+    public void goToNext() {
+        return;
+    }
+
+    public ArrayList<Player> endGame() {
+        return;
+    }
+
+    public boolean isFinished() {
+        return;
+    }
+
+    public ArrayList<Player> getPodium() {
+        return;
+    }
+
+
+
+
 }
