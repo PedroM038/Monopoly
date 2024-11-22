@@ -11,6 +11,10 @@ public class MoneySpace extends Space {
         return this.money < 0;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     public int getMoney() {
         return this.money;
     }
