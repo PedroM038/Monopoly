@@ -2,7 +2,7 @@ package assets;
 
 public class Property {
 	// constants
-	public static final int MAX_NUM_HOUSES = 4;
+	public final int MAX_NUM_HOUSES = 4;
 
 	private String name;
 	private int price;
