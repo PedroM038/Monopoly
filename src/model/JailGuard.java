@@ -7,7 +7,7 @@ public class JailGuard {
     private ArrayList<Integer> playersJailTime;
     private int bail;
 
-    public JailGuard(int numPlayers, bail) {
+    public JailGuard(int numPlayers, int bail) {
         this.totalJailTime = SpaceConstants.TOTAL_JAIL_TIME;
         this.playersJailTime = new ArrayList<Integer>();
         for (int i = 0; i < numPlayers; i++) {
@@ -50,7 +50,7 @@ public class JailGuard {
 
     public void bailPlayer(int playerId, Player player) {
         if (!this.canBail(playerId, player)) {
-            throw new IllegalArgumentException("cannot bail player.")
+            throw new IllegalArgumentException("cannot bail player.");
         }
         this.freePlayer(playerId, player);
         player.pay(this.bail);
@@ -68,11 +68,11 @@ public class JailGuard {
 
     // GETTERS
     public int getTotalJailTime() {
-        this.totalJailTime;
+        return this.totalJailTime;
     }
 
     public ArrayList<Integer> getPlayersJailTime() {
-        this.playersJailTime;
+        return this.playersJailTime;
     }
 
     public int getBailValue() {

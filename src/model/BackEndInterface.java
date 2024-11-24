@@ -9,7 +9,6 @@ public class BackEndInterface {
     private Board board;
     private Deck deck;
     private Dice dice;
-    private Bank banker;
     private JailGuard guard;
     private int maxTurns;
     private ArrayList<Integer>playerOrder;
@@ -19,14 +18,13 @@ public class BackEndInterface {
     public BackEndInterface(int numPlayers, ArrayList<String> playersName, ArrayList<String> playersColors, int maxTurns) {
         this.players = new ArrayList<Player>();
         for (int i = 0; i < numPlayers; i++) {
-            players.add(new Player(playersName.get(i), playersColors.get(i)), GameConstants.PLAYER_INITIAL_MONEY);
+            players.add(new Player(playersName.get(i), playersColors.get(i), GameConstants.PLAYER_INITIAL_MONEY));
         }
         this.board = new Board(?????);
         this.deck = new Deck();
         deck.loadCardsFromFile("../../assets/deck/cards.txt");
         this.dice = new Dice(6);
 
-        this.banker = new Bank();
         this.guard = new JailGuard(numPlayers, GameConstants.JAIL_BAIL_VALUE);
 
         this.maxTurns = maxTurns;
@@ -48,7 +46,7 @@ public class BackEndInterface {
     }
 
     public Info moveNextPlayer(ArrayList<Integer> diceResults) {
-        return;
+        return null;
     }
 
     public void buyProperty() {
@@ -72,15 +70,15 @@ public class BackEndInterface {
     }
 
     public ArrayList<Player> endGame() {
-        return;
+        return null;
     }
 
     public boolean isFinished() {
-        return;
+        return false;
     }
 
     public ArrayList<Player> getPodium() {
-        return;
+        return null;
     }
 
 

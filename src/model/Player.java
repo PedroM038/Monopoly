@@ -1,7 +1,9 @@
-package model;
+//package model;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import assets.*;
 
 public class Player {
     private String name;
@@ -23,7 +25,7 @@ public class Player {
         property.buy();
     }
 
-    public boolean sellProperty(Property property) {
+    public void sellProperty(Property property) {
         properties.remove(property);
         property.sell();
     }
@@ -73,7 +75,7 @@ public class Player {
         return this.properties;
     }
 
-    public isLocked() {
+    public boolean isLocked() {
         return this.isLocked;
     }
 }
