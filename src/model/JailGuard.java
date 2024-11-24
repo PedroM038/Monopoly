@@ -16,30 +16,30 @@ public class JailGuard {
         this.bail = bail;
     }
 
-    public void lockPlayer(int playerId, Player player) {
-        this.playersJailTime.set(playerId, this.totalJailTime);
+    public void lockPlayer(Player player) {
+        this.playersJailTime.set(player.getId(), this.totalJailTime);
         player.lock();
     }
 
-    public void freePlayer(int playerId, Player player) {
-        this.playersJailTime.set(playerId, 0);
+    public void freePlayer(Player player) {
+        this.playersJailTime.set(player.getId(), 0);
         player.free();
     }
 
-    public int timeLocked(int playerId) {
-        return this.playersJailTime.get(playerId);
+    public int timeLocked(Player player) {
+        return this.playersJailTime.get(player.getId());
     }
 
     // called at the end of turn
-    public void reducePenalty(int playerId) {
-        int time = this.playersJailTime.get(playerId);
+    public void reducePenalty(Player player) {
+        int time = this.playersJailTime.get(player.getId());
         if (time > 0) {
-            this.playersJailTime.set(playerId, time-1);
+            this.playersJailTime.set(player.getId(), time-1);
         }
     }
 
-    public boolean canBail(int playerId, Player player) {
-        if (this.playersJailTime.get(playerId) != 0) {
+    public boolean canBail(Player player) {
+        if (this.playersJailTime.get(player.getId()) != 0) {
             return false;
         }
         if (player.getMoney() < this.bail) {
@@ -48,18 +48,18 @@ public class JailGuard {
         return true;
     }
 
-    public void bailPlayer(int playerId, Player player) {
-        if (!this.canBail(playerId, player)) {
+    public void bailPlayer(Player player) {
+        if (!this.canBail(player)) {
             throw new IllegalArgumentException("cannot bail player.");
         }
-        this.freePlayer(playerId, player);
+        this.freePlayer(player);
         player.pay(this.bail);
     }
 
     // returns if player is free
-    public boolean freePlayerWithDice(int playerId, Player player, int dice1, int dice2) {
+    public boolean freePlayerWithDice(Player player, int dice1, int dice2) {
         if (dice1 == dice2) {
-            this.freePlayer(playerId, player);
+            this.freePlayer(player);
             return true;
         }
         return false;

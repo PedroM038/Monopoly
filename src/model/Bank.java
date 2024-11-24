@@ -12,6 +12,11 @@ public class Bank {
         player.buyProperty(property);
     }
 
+    public static void buyHouse(Player player, Property property) {
+        player.pay(property.getHousePrice());
+        property.buyHouse();
+    }
+
     public static void sellProperty(Player player, Property property) {
         player.sellProperty(property);
         player.remunerate(property.getActualPrice());

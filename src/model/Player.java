@@ -7,13 +7,15 @@ import assets.*;
 
 public class Player {
     private String name;
+    Integer id;
     private String color;
     private int money;
     private List<Property> properties;
     private boolean isLocked;
 
-    public Player(String name, String color, int initialMoney) {
+    public Player(String name, Integer id, String color, int initialMoney) {
         this.name = name;
+        this.id = id;
         this.color = color;
         this.money = initialMoney;
         this.properties = new ArrayList<>();
@@ -61,6 +63,10 @@ public class Player {
     // GETTERS
     public String getName() {
         return this.name;
+    }
+
+    public Integer getId() {
+        return this.id;
     }
 
     public String getColor() {

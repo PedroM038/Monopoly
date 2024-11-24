@@ -71,17 +71,17 @@ public class Board {
         return moneySpaces;
     }
 
-    public void movePlayer(int playerId, int moves) {
-        this.playersPos.set(playerId, (this.playersPos.get(playerId) + moves) % this.getBoardSize());
+    public void movePlayer(Player player, int moves) {
+        this.playersPos.set(player.getId(), (this.playersPos.get(player.getId()) + moves) % this.getBoardSize());
     }
 
     // if players moves, does it passes through the start space
-    public boolean goesThroughStart(int playerId, int moves) {
-        return this.playersPos.get(playerId) + moves >= this.getBoardSize();
+    public boolean goesThroughStart(Player player, int moves) {
+        return this.playersPos.get(player.getId()) + moves >= this.getBoardSize();
     }
 
-    public Space getPlayerSpace(int playerId) {
-        return this.getSpace(this.playersPos.get(playerId));
+    public Space getPlayerSpace(Player player) {
+        return this.getSpace(this.playersPos.get(player.getId()));
     }
 
     public Space getSpace(int id) {
@@ -95,7 +95,7 @@ public class Board {
         return spaces.size();
     }
 
-    public int getPlayerPos(int playerId) {
-        return this.playersPos.get(playerId);
+    public int getPlayerPos(Player player) {
+        return this.playersPos.get(player.getId());
     }
 }

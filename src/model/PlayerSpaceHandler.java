@@ -3,7 +3,7 @@
 import assets.*;
 
 public class PlayerSpaceHandler {
-    public static Info solve(Player player, Space space) {
+    public static Info solve(Player player, Space space, Info info) {
        if (space instanceof CardSpace) {
         return PlayerSpaceHandler.solveCardSpace(player, (CardSpace) space);
        }
