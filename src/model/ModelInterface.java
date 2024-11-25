@@ -9,6 +9,7 @@ public class ModelInterface {
     private Board board;
     private Deck deck;
     private Dice dice;
+    private int numDice;
     private JailGuard guard;
     private int maxTurns;
     private int numTurns;
@@ -16,7 +17,7 @@ public class ModelInterface {
 
     private int nextPlayerPos;
 
-    public ModelInterface(int numPlayers, ArrayList<String> playersName, ArrayList<String> playersColors, int maxTurns) {
+    public ModelInterface(int numPlayers, ArrayList<String> playersName, ArrayList<String> playersColors, int maxTurns, int numDice) {
         this.players = new ArrayList<Player>();
         for (int i = 0; i < numPlayers; i++) {
             players.add(new Player(playersName.get(i), i, playersColors.get(i), GameConstants.PLAYER_INITIAL_MONEY));
@@ -26,6 +27,7 @@ public class ModelInterface {
         this.deck = new Deck();
         deck.loadCardsFromFile("../../assets/deck/cards.txt");
         this.dice = new Dice(6);
+        this.numDice = numDice;
 
         this.guard = new JailGuard(numPlayers, GameConstants.JAIL_BAIL_VALUE);
 
@@ -38,8 +40,9 @@ public class ModelInterface {
 
     public ArrayList<Integer> rollDices() {
         ArrayList<Integer> result = new ArrayList<Integer>();
-        result.add(Integer.valueOf(this.dice.roll()));
-        result.add(Integer.valueOf(this.dice.roll()));
+        for (int i = 0; i < this.numDice; i++) {
+            result.add(Integer.valueOf(this.dice.roll()));
+        }
         return result;
     }
 
@@ -57,7 +60,7 @@ public class ModelInterface {
             pairsResultPlayer.add(new Integer[]{playersResults.get(i), i});
         }
         pairsResultPlayer.sort((array1, array2) -> Integer.compare(array1[0], array2[0]));
-        for (int i = playersResults.size(); i >= 0; i--) {
+        for (int i = playersResults.size()-1; i >= 0; i--) {
             this.playersOrder.add(pairsResultPlayer.get(i)[1]);
         }
     }
@@ -73,6 +76,7 @@ public class ModelInterface {
         if (player.isLocked()) {
             info = new Info(player);
             info.space = this.getPlayerSpace(player);
+            info.spaceId = this.board.getPlayerPos(player);
             if (this.guard.freePlayerWithDice(player, diceResults.get(0), diceResults.get(1))) {
                 return info;
             }
@@ -85,7 +89,8 @@ public class ModelInterface {
         int numMoves = this.totalDiceResult(diceResults);
         this.board.movePlayer(player, numMoves);
         Space space = this.getPlayerSpace(player);
-        info = PlayerSpaceHandler.solve(player, space, this);
+        int spaceId = this.board.getPlayerPos(player);
+        info = PlayerSpaceHandler.solve(player, space, spaceId, this);
         if (this.board.goesThroughStart(player, numMoves)) {
             info.gotThroughStart = true;
         }
@@ -142,7 +147,7 @@ public class ModelInterface {
         }
         pairsResultPlayer.sort((array1, array2) -> Integer.compare(array1[0], array2[0]));
         ArrayList<Player> podium = new ArrayList<>();
-        for (int i = this.players.size(); i >= 0; i--) {
+        for (int i = this.players.size()-1; i >= 0; i--) {
             int pos = pairsResultPlayer.get(i)[1];
             podium.add(this.players.get(pos));
         }

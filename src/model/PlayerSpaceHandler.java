@@ -3,9 +3,10 @@
 import assets.*;
 
 public class PlayerSpaceHandler {
-    public static Info solve(Player player, Space space, ModelInterface model) {
+    public static Info solve(Player player, Space space, int spaceId, ModelInterface model) {
         Info info = new Info(player);
         info.space = space;
+        info.spaceId = spaceId;
         if (space instanceof CardSpace) {
             PlayerSpaceHandler.solveCardSpace(player, (CardSpace) space, info, model);
         }

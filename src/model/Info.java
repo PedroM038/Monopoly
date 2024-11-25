@@ -6,6 +6,7 @@ import assets.*;
 public class Info {
     public Player player;
     public Space space;
+    public int spaceId;
     public Card card;
     public boolean gotThroughStart;
     public ArrayList<String>possible_actions;
@@ -16,6 +17,7 @@ public class Info {
     public Info(Player player) {
         this.player = player;
         this.space = null;
+        this.spaceId = 0;
         this.card = null;
         this.gotThroughStart = false;
         this.possible_actions = new ArrayList<>();

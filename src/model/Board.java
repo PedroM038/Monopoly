@@ -84,6 +84,10 @@ public class Board {
         return this.getSpace(this.playersPos.get(player.getId()));
     }
 
+    public Integer getPlayerSpaceId(Player player) {
+        return this.playersPos.get(player.getId());
+    }
+
     public Space getSpace(int id) {
         if (id >= 0 && id < spaces.size()) {
             return spaces.get(id);
