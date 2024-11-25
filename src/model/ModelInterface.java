@@ -4,7 +4,7 @@ import assets.*;
 import java.util.ArrayList;
 
 
-public class BackEndInterface {
+public class ModelInterface {
     private ArrayList<Player> players;
     private Board board;
     private Deck deck;
@@ -16,7 +16,7 @@ public class BackEndInterface {
 
     private int nextPlayerPos;
 
-    public BackEndInterface(int numPlayers, ArrayList<String> playersName, ArrayList<String> playersColors, int maxTurns) {
+    public ModelInterface(int numPlayers, ArrayList<String> playersName, ArrayList<String> playersColors, int maxTurns) {
         this.players = new ArrayList<Player>();
         for (int i = 0; i < numPlayers; i++) {
             players.add(new Player(playersName.get(i), i, playersColors.get(i), GameConstants.PLAYER_INITIAL_MONEY));
@@ -69,8 +69,9 @@ public class BackEndInterface {
         }
 
         this.numTurns += 1;
-        Info info = new Info(player);
+        Info info;
         if (player.isLocked()) {
+            info = new Info(player);
             info.space = this.getPlayerSpace(player);
             if (this.guard.freePlayerWithDice(player, diceResults.get(0), diceResults.get(1))) {
                 return info;
@@ -82,12 +83,12 @@ public class BackEndInterface {
             return info;
         }
         int numMoves = this.totalDiceResult(diceResults);
+        this.board.movePlayer(player, numMoves);
+        Space space = this.getPlayerSpace(player);
+        info = PlayerSpaceHandler.solve(player, space, this);
         if (this.board.goesThroughStart(player, numMoves)) {
             info.gotThroughStart = true;
         }
-        this.board.movePlayer(player, numMoves);
-        Space space = this.getPlayerSpace(player);
-        PlayerSpaceHandler.solve(player, space, info);
         return info;
     }
 

@@ -3,42 +3,70 @@
 import assets.*;
 
 public class PlayerSpaceHandler {
-    public static Info solve(Player player, Space space, Info info) {
-       if (space instanceof CardSpace) {
-        return PlayerSpaceHandler.solveCardSpace(player, (CardSpace) space);
-       }
-       else if (space instanceof MoneySpace) {
-        return PlayerSpaceHandler.solveMoneySpace(player, (MoneySpace) space);
-       }
-       else if (space instanceof PrisonSpace) {
-        return PlayerSpaceHandler.solvePrisonSpace(player, (PrisonSpace) space);
-       }
-       else if (space instanceof PropertySpace) {
-        return PlayerSpaceHandler.solvePropertySpace(player, (PropertySpace) space);
-       }
-       else if (space instanceof VacationSpace) {
-        return PlayerSpaceHandler.solveVacationSpace(player, (VacationSpace) space);
-       }
-       return null; 
+    public static Info solve(Player player, Space space, ModelInterface model) {
+        Info info = new Info(player);
+        info.space = space;
+        if (space instanceof CardSpace) {
+            PlayerSpaceHandler.solveCardSpace(player, (CardSpace) space, info, model);
+        }
+        else if (space instanceof MoneySpace) {
+            PlayerSpaceHandler.solveMoneySpace(player, (MoneySpace) space, info, model);
+        }
+        else if (space instanceof PrisonSpace) {
+            PlayerSpaceHandler.solvePrisonSpace(player, (PrisonSpace) space, info, model);
+        }
+        else if (space instanceof PropertySpace) {
+            PlayerSpaceHandler.solvePropertySpace(player, (PropertySpace) space, info, model);
+        }
+        else if (space instanceof VacationSpace) {
+            PlayerSpaceHandler.solveVacationSpace(player, (VacationSpace) space, info, model);
+        }
+
+        if (player.getProperties().size() > 0) {
+            info.possible_actions.add("sell");
+        }
+        return info; 
     }
 
-    private static Info solveCardSpace(Player player, CardSpace space) {
-        return null;
+    private static void solveCardSpace(Player player, CardSpace space, Info info, ModelInterface model) {
+        Deck deck = model.getDeck();
+        Card card = deck.drawCard();
+        Bank.applyCardToPlayer(player, card);
+        info.card = card;
     }
 
-    private static Info solveMoneySpace(Player player, MoneySpace space) {
-        return null;
+    private static void solveMoneySpace(Player player, MoneySpace space, Info info, ModelInterface model) {
+        int money = space.getMoney();
+        if (space.isLoss()) {
+            player.pay(-money);
+        }
+        else {
+            player.remunerate(money);
+        }
     }
 
-    private static Info solvePrisonSpace(Player player, PrisonSpace space) {
-        return null;
+    private static void solvePrisonSpace(Player player, PrisonSpace space, Info info, ModelInterface model) {
+        JailGuard guard = model.getGuard();
+        guard.lockPlayer(player);
+        info.gotLocked = true;
     }
 
-    private static Info solvePropertySpace(Player player, PropertySpace space) {
-        return null;
+    private static void solvePropertySpace(Player player, PropertySpace space, Info info, ModelInterface model) {
+        Property property = space.getProperty();
+        int ownerId = space.getOwner();
+        if (ownerId == -1) {
+            info.possible_actions.add("buy");
+        }
+        else if (ownerId == player.getId() && !property.hasAllHouses()) {
+            info.possible_actions.add("buyHouse");
+        }
+        else {
+            Player owner = model.getPlayers().get(ownerId);
+            Bank.chargeRent(owner, player, property);
+        }
     }
 
-    private static Info solveVacationSpace(Player player, VacationSpace space) {
-        return null;
+    private static void solveVacationSpace(Player player, VacationSpace space, Info info, ModelInterface model) {
+        return;
     }
 }

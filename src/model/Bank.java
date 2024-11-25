@@ -30,6 +30,12 @@ public class Bank {
         player.pay(money);
     }
 
+    public static void chargeRent(Player owner, Player tenant, Property property) {
+        int rent = property.getRentValue();
+        Bank.chargePlayer(tenant, rent);
+        Bank.payPlayer(owner, rent);
+    }
+
     // returns true if player gains money, false otherwise
     public static boolean applyCardToPlayer(Player player, Card card) {
         if (card.getType().equals("Sorte")) {
