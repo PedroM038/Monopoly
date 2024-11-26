@@ -1,48 +1,53 @@
 package view;
 
-import assets.Dice;
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+import java.awt.*;
 import javax.swing.*;
+
 public class GameUI extends JFrame {
-    private JPanel boardPanel;
-    private JPanel controlPanel;
-    private JButton rollButton;
-    private JLabel diceResultLabel;
-    private final Dice dice = new Dice(6);
+
+    int height = 1080;
+    int width = 1920;
 
     public GameUI() {
-        super("Monopoly");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1080, 720);
-        setLayout(new BorderLayout());
-        
-        initBoardPanel();
-        initControlPanel();
-        
-        setVisible(true);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setSize(width, height);
+        this.getContentPane().setBackground(java.awt.Color.WHITE);
+        this.setLayout(null);
+        initializeBoardPanel();
+        initializeControlPanel();
+
+        this.setVisible(true);
     }
 
-    private void initBoardPanel() {
-        boardPanel = new JPanel();
-        add(boardPanel, BorderLayout.CENTER); // Central panel for the board
+    private void initializeBoardPanel() {
+        JPanel boardPanel = new JPanel();
+        boardPanel.setBackground(Color.BLACK);
+        boardPanel.setSize(960, height);
+        boardPanel.setLocation(0, 0);
+        this.add(boardPanel);
     }
     
-    private void initControlPanel() {
-        controlPanel = new JPanel();
-        controlPanel.setLayout(new FlowLayout()); // Layout para organizar botões
-        add(controlPanel, BorderLayout.SOUTH); // Bottom panel for controls
-        
-        rollButton = new JButton("Roll");
-        controlPanel.add(rollButton);
+    private void initializeControlPanel() {
+        JPanel turnPanel = new JPanel();
+        turnPanel.setBackground(Color.WHITE);
+        turnPanel.setSize(960, 450);
+        turnPanel.setLocation(960, 0);
+        turnPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        this.add(turnPanel);
 
-        diceResultLabel = new JLabel("Dice result: ");
-        controlPanel.add(diceResultLabel);
+        JPanel spacePanel = new JPanel();
+        Color color = new Color(0, 100, 25, 150);
+        spacePanel.setBackground(color);
+        spacePanel.setSize(960, 450);
+        spacePanel.setLocation(960, 450);
+        spacePanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        this.add(spacePanel);
 
-        //adiciona funcionalidade ao botão
-        rollButton.addActionListener(e -> {
-            int result = dice.roll();
-            diceResultLabel.setText("Dice result: " + result);
-        });
+        JPanel buttonsPanel = new JPanel();
+        buttonsPanel.setBackground(Color.WHITE);
+        buttonsPanel.setSize(960, 180);
+        buttonsPanel.setLocation(960, 900);
+        buttonsPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        this.add(buttonsPanel);
     }
 }
