@@ -1,16 +1,15 @@
 //package model;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import assets.*;
 
 public class Player {
     private String name;
-    Integer id;
+    private Integer id;
     private String color;
     private int money;
-    private List<Property> properties;
+    private ArrayList<Property> properties;
     private boolean isLocked;
 
     public Player(String name, Integer id, String color, int initialMoney) {
@@ -43,7 +42,7 @@ public class Player {
     // Método para calcular o valor total das propriedades possuídas
     public int getTotalAssets() {
         int totalAssets = this.money;
-        for (Property property : properties) {
+        for (Property property : this.properties) {
             totalAssets += property.getMortgagePrice();
         }
         return totalAssets;
@@ -77,7 +76,7 @@ public class Player {
         return this.money;
     }
 
-    public List<Property> getProperties() {
+    public ArrayList<Property> getProperties() {
         return this.properties;
     }
 

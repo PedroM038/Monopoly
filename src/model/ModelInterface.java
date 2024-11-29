@@ -94,6 +94,7 @@ public class ModelInterface {
         if (this.board.goesThroughStart(player, numMoves)) {
             info.gotThroughStart = true;
         }
+        info.numMoves = numMoves;
         return info;
     }
 
@@ -183,9 +184,21 @@ public class ModelInterface {
     public int getMaxTurns() {
         return this.maxTurns;
     }
+
+    public int getNumTurns() {
+        return this.numTurns;
+    }
+
+    public int getLeftTurns() {
+        return this.maxTurns - this.numTurns;
+    }
     
     public ArrayList<Integer> getPlayersOrder() {
         return this.playersOrder;
+    }
+
+    public Player getPlayerById(int id) {
+        return this.players.get(id);
     }
 
     public Player getNextPlayer() {

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class GameConstants {
-    public static int PLAYER_INITIAL_MONEY = 200;
-    public static int JAIL_BAIL_VALUE = 200;
+    public static int PLAYER_INITIAL_MONEY = 2558000;
+    public static int JAIL_BAIL_VALUE = 50000;
 
     // board related
     public static int BOARD_SIZE = 40;
