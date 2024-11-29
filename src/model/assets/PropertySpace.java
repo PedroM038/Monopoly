@@ -25,6 +25,10 @@ public class PropertySpace extends Space {
         this.property.sell();
     }
 
+    public boolean isOwner(int playerId) {
+        return this.ownerId == playerId;
+    }
+
     public boolean hasOwner() {
         return this.ownerId != -1;
     }
