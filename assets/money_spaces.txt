@@ -1,0 +1,2 @@
+imposto,-1000
+bonus,1000
