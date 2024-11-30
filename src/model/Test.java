@@ -111,9 +111,9 @@ public class Test {
                 System.out.println("Space is a PropertySpace!");
                 PropertySpace tempSpace = (PropertySpace) info.space;
                 Property property = tempSpace.getProperty();
-                System.out.println("Property: "+property.getName());
-                if (tempSpace.hasOwner() && !tempSpace.isOwner(player.getId())) {
-                    System.out.println("PLayer paid rent");
+                Aux.printProperty(property);
+                if (property.hasOwner() && !property.isOwner(player.getId())) {
+                    System.out.println("Player paid rent");
                 }
             }
             else if (info.space instanceof VacationSpace) {
@@ -154,16 +154,31 @@ public class Test {
                 System.out.println("No options, going to the next player");
             }
 
+            System.out.println("Choose an option: (0) go to next player, (1) print players, (2) print properties");
+            System.out.print("Choise: ");
+            int choice = Integer.parseInt(scanner.nextLine());
+            while (choice != 0) {
+                if (choice == 1) {
+                    Aux.printAllPlayers(model.getPlayers());
+                }
+                else if (choice == 2) {
+                    Aux.printAllProperties(model.getProperties());
+                }
+                System.out.println("Choose an option: (0) go to next player, (1) print players, (2) print properties");
+                System.out.print("Choise: ");
+                choice = Integer.parseInt(scanner.nextLine());
+            }
+
             // go to next player
-            Aux.printPlayer(player);
             System.out.println("We still have "+model.getLeftTurns()+" turns!");
             model.goToNextPlayer();
+
         }
 
         // show results
         System.out.println("THE GAME IS FINISHED!");
-        ArrayList<Player> podium = model.getPodium();
-        System.out.println("Winner: "+podium.get(0).getName());
+        Player winner = model.getWinner();
+        System.out.println("Winner: "+winner.getName());
 
         // end/save
         scanner.close();
@@ -200,6 +215,12 @@ class Aux {
         System.out.println("----------");
         System.out.println("PROPERTY INFO");
         System.out.println("Name: "+property.getName());
+        if (property.hasOwner()) {
+            System.out.println("Owner: Player"+property.getOwnerId());
+        }
+        else {
+            System.out.println("Owner: None");
+        }
         if (property.isMortgaged()) {
             System.out.println("Price: "+property.getPrice()+" (mortgaged)");
         }
@@ -212,5 +233,17 @@ class Aux {
         System.out.println("Number of Houses: "+property.getNumHouses());
         System.out.println("Actual rent: "+property.getRentValue());
         System.out.println("----------");
+    }
+
+    static void printAllPlayers(ArrayList<Player> players) {
+        for (int i = 0; i < players.size(); i++) {
+            Aux.printPlayer(players.get(i));
+        }
+    }
+
+    static void printAllProperties(ArrayList<Property> properties) {
+        for (int i = 0; i < properties.size(); i++) {
+            Aux.printProperty(properties.get(i));
+        }
     }
 }
