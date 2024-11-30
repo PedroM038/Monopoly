@@ -1,2 +1,4 @@
-imposto,-1000
-bonus,1000
+Seu processador parou de funcionar,-200
+Ganhou novo monitor,200
+Submeteu artigo,100
+Reunião semanal,-100
