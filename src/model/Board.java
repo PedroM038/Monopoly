@@ -42,10 +42,10 @@ public class Board {
                 String[] parts = line.split(",");
                 String name = parts[0];
                 int price = Integer.parseInt(parts[1]);
-                int housePrice = Integer.parseInt(parts[2]);
-                int houseValue = Integer.parseInt(parts[3]);
-                int mortgagePrice = Integer.parseInt(parts[4]);
-                int baseRent = Integer.parseInt(parts[5]);
+                int baseRent = Integer.parseInt(parts[2]);
+                int housePrice = Integer.parseInt(parts[3]);
+                int houseValue = Integer.parseInt(parts[4]);
+                int mortgagePrice = Integer.parseInt(parts[5]);
 
                 properties.add(new Property(name, price, housePrice, houseValue, mortgagePrice, baseRent));
             }
@@ -78,6 +78,17 @@ public class Board {
     // if players moves, does it passes through the start space
     public boolean goesThroughStart(Player player, int moves) {
         return this.playersPos.get(player.getId()) + moves >= this.getBoardSize();
+    }
+
+    public ArrayList<Property> getProperties() {
+        ArrayList<Property> properties = new ArrayList<>();
+        for (int i = 0; i < this.spaces.size(); i++) {
+            if (this.spaces.get(i) instanceof PropertySpace) {
+                PropertySpace tempSpace = (PropertySpace) this.spaces.get(i);
+                properties.add(tempSpace.getProperty()); 
+            }
+        }
+        return properties;
     }
 
     public Space getPlayerSpace(Player player) {

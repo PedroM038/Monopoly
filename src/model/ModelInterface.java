@@ -100,6 +100,9 @@ public class ModelInterface {
 
     public void goToNextPlayer() {
         this.nextPlayerPos = (this.nextPlayerPos + 1) % this.players.size();
+        while (this.isEliminated(this.getNextPlayer())) {
+            this.nextPlayerPos = (this.nextPlayerPos + 1) % this.players.size();
+        }
     }
 
     public Space getPlayerSpace(Player player) {
@@ -136,8 +139,16 @@ public class ModelInterface {
         this.guard.bailPlayer(player);
     }
 
+    // game is finished when all turns have ended or only one player left
     public boolean isFinished() {
-        return this.maxTurns == this.numTurns;
+        int leftPlayers = 0;
+        for (int i = 0; i < this.players.size(); i++) {
+            Player player = this.players.get(i);
+            if (!player.isEliminated()) {
+                leftPlayers++;
+            }
+        }
+        return this.maxTurns == this.numTurns || leftPlayers == 1;
     }
 
     public ArrayList<Player> getPodium() {
@@ -150,13 +161,23 @@ public class ModelInterface {
         ArrayList<Player> podium = new ArrayList<>();
         for (int i = this.players.size()-1; i >= 0; i--) {
             int pos = pairsResultPlayer.get(i)[1];
-            podium.add(this.players.get(pos));
+            if (!this.isEliminated(this.players.get(pos))) {
+                podium.add(this.players.get(pos));
+            }
         }
         return podium;
     }
 
+    public Player getWinner() {
+        return this.getPodium().get(0);
+    }
+
     public boolean isEliminated(Player player) {
-        return player.getTotalAssets() <= 0;
+        return player.isEliminated();
+    }
+
+    public ArrayList<Property> getProperties() {
+        return this.board.getProperties();
     }
 
 

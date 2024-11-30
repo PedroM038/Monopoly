@@ -1,29 +1,15 @@
-Pague a manutenção de suas propriedades,pagar,50000,Revés
-Receba uma herança de um parente distante,receber,70000,Sorte
-Pague multa de estacionamento,pagar,5000,Revés
-Vá até o banco e receba um empréstimo,receber,10000,Sorte
-Você foi pego falsificando bilhetes de transporte,pagar,10000,Revés
-Pague taxas de imposto,pagar,20000,Revés
-Receba um prêmio na loteria,receber,100000,Sorte
-Seus investimentos em ações caíram,pagar,15000,Revés
-Pague por danos acidentais a uma loja,pagar,75000,Revés
-Você vendeu uma obra de arte rara,receber,30000,Sorte
-Pague uma conta médica,pagar,15000,Revés
-Receba um bônus por boa conduta,receber,5000,Sorte
-Seus vizinhos processaram você por barulho,pagar,5000,Revés
-Pague por estacionar em local proibido,pagar,5000,Revés
-Sua empresa teve lucros extraordinários,receber,5000,Sorte
-Pague uma dívida de cartão de crédito,pagar,1000,Revés
-Ganhe um concurso de culinária,receber,1000,Sorte
-Você foi multado por excesso de velocidade,pagar,12000,Revés
-Pague a manutenção da sua casa,pagar,12000,Revés
-Ganhe um prêmio em um concurso de fotografia,receber,10000,Sorte
-Seus encanamentos quebraram,pagar,2000,Revés
-Pague pelos reparos de um acidente de trânsito,pagar,10000,Revés
-Receba um presente de aniversário,receber,2000,Sorte
-Pague por consertos na sua bicicleta,pagar,50000,Revés
-Você foi assaltado,pagar,100000,Revés
-Receba um reembolso de impostos,receber,10000,Sorte
-Pague por danos a um carro alugado,pagar,5000,Revés
-Receba um bônus salarial,receber,15000,Sorte
-Pague por serviços de consultoria,pagar,75000,Revés
+Reprovou em Paradigmas,pagar,200,Revés
+Professor deu 100 pro seu trabalho,receber,200,Sorte
+Você ganhou na maratona,receber,150,Sorte
+Seu código deu WA,pagar,50,Revés
+Tropeçou nos fios,pagar,150,Revés
+Passou no PS do PET,receber,150,Sorte
+Passou no PS do C3SL,receber,100,Sorte
+Quebrou a barreira,receber,175,Sorte
+RU tava fechado hoje,pagar,100,Revés
+Fila burra do RU,pagar,20,Revés
+Seu grupo ganhou novo monitor,receber,30,Sorte
+Laboratório tava fechado,pagar,70,Revés
+Professor cancelou a aula,receber,15,Sorte
+Perdeu o Intercampi,pagar,120,Revés
+Dia de Strogonoff no RU,receber,100,Sorte

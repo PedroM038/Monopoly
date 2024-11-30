@@ -12,6 +12,7 @@ public class Property {
 	private int mortgagePrice;
 	private boolean isMortgaged;
 	private int baseRent;
+	private int ownerId;
     
 	public Property(String name, int price, int housePrice, int houseValue, int mortgagePrice, int baseRent) {
 		this.name = name;
@@ -22,6 +23,7 @@ public class Property {
 		this.mortgagePrice = mortgagePrice;
 		this.isMortgaged = false;
 		this.baseRent = baseRent;  // rent when there's no houses/hotels
+		this.ownerId = -1;  // -1 means no owner;
 	}
 
 	// price of property
@@ -41,15 +43,17 @@ public class Property {
 	}
 
 	// buy property
-	public void buy() {
+	public void buy(int ownerId) {
 		this.isMortgaged = false;
 		this.numHouses = 0;
+		this.ownerId = ownerId;
 	}
 
 	// sell property
 	public void sell() {
 		this.isMortgaged = true;
 		this.numHouses = 0;
+		this.ownerId = -1;
 	}
 
 	// owner buys a house
@@ -63,6 +67,14 @@ public class Property {
 	public boolean hasAllHouses() {
 		return this.numHouses == this.MAX_NUM_HOUSES;
 	}
+
+	public boolean isOwner(int playerId) {
+        return this.ownerId == playerId;
+    }
+
+    public boolean hasOwner() {
+        return this.ownerId != -1;
+    }
 
 
 	// GETTERS
@@ -101,4 +113,8 @@ public class Property {
     public int getBaseRent() {
         return this.baseRent;
     }
+
+	public int getOwnerId() {
+		return this.ownerId;
+	}
 }

@@ -54,7 +54,7 @@ public class PlayerSpaceHandler {
 
     private static void solvePropertySpace(Player player, PropertySpace space, Info info, ModelInterface model) {
         Property property = space.getProperty();
-        int ownerId = space.getOwner();
+        int ownerId = property.getOwnerId();
         if (ownerId == -1) {
             info.possible_actions.add("buy");
         }

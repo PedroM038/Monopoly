@@ -23,7 +23,7 @@ public class Player {
 
     public void buyProperty(Property property) {
         properties.add(property);
-        property.buy();
+        property.buy(this.id);
     }
 
     public void sellProperty(Property property) {
@@ -46,6 +46,10 @@ public class Player {
             totalAssets += property.getMortgagePrice();
         }
         return totalAssets;
+    }
+
+    public boolean isEliminated() {
+        return this.getMoney() < 0;
     }
 
     // gains money
