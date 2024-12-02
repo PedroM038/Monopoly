@@ -1,3 +1,8 @@
+/*
+ * The Info class stores data about a play in the game
+ * It stores all data necessary to give the controller to show in vision
+ */
+
 //package model
 
 import java.util.ArrayList;

@@ -1,3 +1,8 @@
+/*
+ * The Deck class represents the deck from the game
+ * It stores the cards and draws a card for the players
+ */
+
 package assets;
 
 import java.io.*;

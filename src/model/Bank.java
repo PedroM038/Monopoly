@@ -1,3 +1,9 @@
+/*
+ * The Bank class represents the banker from the game
+ * It's purpose is to do all financial transactions from the game
+ * It does not store data, and acts as a static class 
+ */
+
 //package model;
 
 import assets.*;

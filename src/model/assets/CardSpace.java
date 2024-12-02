@@ -1,3 +1,7 @@
+/*
+ * The CardSpace class represents a class that gives a card to the players that falls into this space
+ */
+
 package assets;
 
 public class CardSpace extends Space {

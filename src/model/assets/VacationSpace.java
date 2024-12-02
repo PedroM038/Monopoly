@@ -1,3 +1,7 @@
+/*
+ * The Vacation class represents a vacation space from the game
+ */
+
 package assets;
 
 public class VacationSpace extends Space {

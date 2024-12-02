@@ -1,3 +1,9 @@
+/*
+ * The PlayerSpaceHandler class handles all necessary actions when a player falls in a space
+ * It does not store data, only does the actions necessary
+ * Acts like a static class
+ */
+
 //package model;
 
 import assets.*;

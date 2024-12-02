@@ -1,3 +1,7 @@
+/*
+ * The PropertySpace class represents a space with a property from the game
+ */
+
 package assets;
 
 

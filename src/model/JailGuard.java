@@ -1,3 +1,9 @@
+/*
+ * The JailGuard class handles the players in the jail
+ * It stores only data about how much time each player is in prison
+ * It's actions include locking players and freeing them
+ */
+
 //package model
 import assets.*;
 import java.util.ArrayList;

@@ -1,3 +1,8 @@
+/*
+ * The GameConstants class just stores some important constants about the game
+ * This incluses board size and spaces positions
+ */
+
 //package model;
 
 import java.util.ArrayList;

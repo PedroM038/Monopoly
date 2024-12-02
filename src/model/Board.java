@@ -1,3 +1,9 @@
+/*
+ * The Board class represents the board from the game
+ * It's stores data about the spaces and the player's positions
+ * It's only actions are to move players and give information about the positions
+ */
+
 //package model;
 
 import assets.*;

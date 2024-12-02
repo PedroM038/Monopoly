@@ -1,3 +1,7 @@
+/*
+ * The Dice class represents a dice, with any number of sides
+ */
+
 package assets;
 
 import java.util.Random;

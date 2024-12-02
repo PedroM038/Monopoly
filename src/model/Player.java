@@ -1,3 +1,9 @@
+/*
+ * The Player class represents a player from the game
+ * It stores all data about the player, and handles the actions a player can do in a game
+ * such as buy and sell properties
+ */
+
 //package model;
 
 import java.util.ArrayList;

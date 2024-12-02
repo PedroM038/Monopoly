@@ -1,3 +1,9 @@
+/*
+ * The Space class represents a space from the board of the game
+ * It represents a generic space that's stores the data from that space
+ * The focus of this class is to only store data, and doesn't act on other classes
+ */
+
 package assets;
 
 import java.io.*;

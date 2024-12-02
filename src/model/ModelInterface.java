@@ -1,3 +1,9 @@
+/*
+ * The ModelInterface class represents the interface of the model
+ * The controller only needs to communicate with this class
+ * It stores all data necessary to play the game, and handles all actions done by the players
+ */
+
 //package model;
 
 import assets.*;

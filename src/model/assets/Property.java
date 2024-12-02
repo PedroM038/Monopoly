@@ -1,3 +1,8 @@
+/*
+ * The Property class represents a property from the game
+ * It focuses in only storing data
+ */
+
 package assets;
 import java.io.*;
 

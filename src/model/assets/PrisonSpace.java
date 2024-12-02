@@ -1,3 +1,9 @@
+/*
+ * The PrisonSpace class represents the jail from the game
+ * It only stores data about the jail, and does not affect the players
+ * 
+ */
+
 package assets;
 
 

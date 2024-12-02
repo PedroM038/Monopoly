@@ -1,3 +1,7 @@
+/*
+ * The MoneySpace class represents a Space that gives/removes money from the player
+ */
+
 package assets;
 
 

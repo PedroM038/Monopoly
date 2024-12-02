@@ -1,3 +1,8 @@
+/*
+ * The Card class representes a card from the game
+ * It stores data about the card, including what effects should apply to player
+ */
+
 package assets;
 import java.io.*;
 
