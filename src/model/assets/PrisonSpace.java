@@ -1,5 +1,6 @@
 package assets;
 
+
 public class PrisonSpace extends Space {
     public PrisonSpace() {
         this.description = "PRISON";

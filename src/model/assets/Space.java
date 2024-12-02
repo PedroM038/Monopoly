@@ -1,6 +1,8 @@
 package assets;
 
-public class Space {
+import java.io.*;
+
+public class Space implements Serializable {
     protected String description;
 
     public Space() {

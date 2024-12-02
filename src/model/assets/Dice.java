@@ -1,13 +1,14 @@
 package assets;
 
 import java.util.Random;
+import java.io.*;
 
-public class Dice {
-    private int sides; // Number of sides on the dice
+public class Dice implements Serializable {
+    private Integer sides; // Number of sides on the dice
     private Random random; // Random object to generate random numbers
 
     // Constructor that initializes the dice with n sides
-    public Dice(int sides) {
+    public Dice(Integer sides) {
         if (sides <= 0) {
             throw new IllegalArgumentException("The number of sides must be greater than 0.");
         }

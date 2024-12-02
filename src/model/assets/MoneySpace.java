@@ -1,8 +1,9 @@
 package assets;
 
+
 public class MoneySpace extends Space {
-    private int money;  // if negative, is a loss
-    public MoneySpace(String description, int money) {
+    private Integer money;  // if negative, is a loss
+    public MoneySpace(String description, Integer money) {
         this.description = description;
         this.money = money;
     }

@@ -1,5 +1,6 @@
 package assets;
 
+
 public class PropertySpace extends Space {
     private Property property;
     public PropertySpace(Property property) {

@@ -1,20 +1,21 @@
 package assets;
+import java.io.*;
 
-public class Property {
+public class Property implements Serializable {
 	// constants
-	public final int MAX_NUM_HOUSES = 4;
+	public final Integer MAX_NUM_HOUSES = 4;
 
 	private String name;
-	private int price;
-	private int housePrice;  // how much to buy house
-	private int numHouses;
-	private int houseValue;  // how much each house adds to rent
-	private int mortgagePrice;
+	private Integer price;
+	private Integer housePrice;  // how much to buy house
+	private Integer numHouses;
+	private Integer houseValue;  // how much each house adds to rent
+	private Integer mortgagePrice;
 	private boolean isMortgaged;
-	private int baseRent;
-	private int ownerId;
+	private Integer baseRent;
+	private Integer ownerId;
     
-	public Property(String name, int price, int housePrice, int houseValue, int mortgagePrice, int baseRent) {
+	public Property(String name, Integer price, Integer housePrice, Integer houseValue, Integer mortgagePrice, Integer baseRent) {
 		this.name = name;
 		this.price = price;
 		this.housePrice = housePrice;
@@ -28,7 +29,7 @@ public class Property {
 
 	// price of property
 	// if mortgaged, mortgage price; otherwise, normal price
-	public int getActualPrice() {
+	public Integer getActualPrice() {
 		if (this.isMortgaged) {
 			return this.mortgagePrice;
 		}
@@ -38,12 +39,12 @@ public class Property {
 	}
 
 	// price of rent
-	public int getRentValue() {
+	public Integer getRentValue() {
 		return this.baseRent + this.numHouses * this.houseValue;
 	}
 
 	// buy property
-	public void buy(int ownerId) {
+	public void buy(Integer ownerId) {
 		this.isMortgaged = false;
 		this.numHouses = 0;
 		this.ownerId = ownerId;
@@ -68,7 +69,7 @@ public class Property {
 		return this.numHouses == this.MAX_NUM_HOUSES;
 	}
 
-	public boolean isOwner(int playerId) {
+	public boolean isOwner(Integer playerId) {
         return this.ownerId == playerId;
     }
 
@@ -82,27 +83,27 @@ public class Property {
         return this.name;
     }
 
-    public int getPrice() {
+    public Integer getPrice() {
         return this.price;
     }
 
-    public int getHousePrice() {
+    public Integer getHousePrice() {
         return this.housePrice;
     }
 
-    public int getNumHouses() {
+    public Integer getNumHouses() {
         return this.numHouses;
     }
 
-	public int getMaxNumHouses() {
+	public Integer getMaxNumHouses() {
 		return this.MAX_NUM_HOUSES;
 	}
 
-    public int getHouseValue() {
+    public Integer getHouseValue() {
         return this.houseValue;
     }
 
-    public int getMortgagePrice() {
+    public Integer getMortgagePrice() {
         return this.mortgagePrice;
     }
 
@@ -110,11 +111,11 @@ public class Property {
         return this.isMortgaged;
     }
 
-    public int getBaseRent() {
+    public Integer getBaseRent() {
         return this.baseRent;
     }
 
-	public int getOwnerId() {
+	public Integer getOwnerId() {
 		return this.ownerId;
 	}
 }

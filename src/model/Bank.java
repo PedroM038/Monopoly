@@ -1,8 +1,9 @@
 //package model;
 
 import assets.*;
+import java.io.*;
 
-public class Bank {
+public class Bank implements Serializable {
     public static boolean canBuyProperty(Player player, Property property) {
         return player.getMoney() >= property.getActualPrice();
     }

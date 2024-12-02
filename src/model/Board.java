@@ -1,13 +1,11 @@
 //package model;
 
 import assets.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 import java.util.ArrayList;
 
-public class Board {
+public class Board implements Serializable {
     private ArrayList<Space> spaces;
     private ArrayList<Integer> playersPos;
 

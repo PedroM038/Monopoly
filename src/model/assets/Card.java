@@ -1,13 +1,14 @@
 package assets;
+import java.io.*;
 
-public class Card {
+public class Card implements Serializable {
 
     private final String description;
     private final String action;
-    private final int amount;
+    private final Integer amount;
     private final String type;
 
-    public Card (String description, String action, int amount, String type) {
+    public Card (String description, String action, Integer amount, String type) {
         this.description = description;
         this.action = action;
         this.amount = amount;

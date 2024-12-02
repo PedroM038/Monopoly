@@ -1,11 +1,12 @@
 //package model
 import assets.*;
 import java.util.ArrayList;
+import java.io.*;
 
-public class JailGuard {
-    private int totalJailTime;
+public class JailGuard implements Serializable {
+    private Integer totalJailTime;
     private ArrayList<Integer> playersJailTime;
-    private int bail;
+    private Integer bail;
 
     public JailGuard(int numPlayers, int bail) {
         this.totalJailTime = SpaceConstants.TOTAL_JAIL_TIME;

@@ -6,12 +6,12 @@ import assets.*;
 public class Info {
     public Player player;
     public Space space;
-    public int spaceId;
+    public Integer spaceId;
     public Card card;
     public boolean gotThroughStart;
     public ArrayList<String>possible_actions;
     public boolean gotLocked;
-    public int numMoves;
+    public Integer numMoves;
 
     // returns an default Info, to be populated
     public Info(Player player) {

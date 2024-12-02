@@ -15,42 +15,50 @@ public class Test {
         ArrayList<String> playersColors = new ArrayList<>();
         int maxTurns;
         int numDice = 2;
-        
-        // get players (number, names)
-        System.out.print("Number of players: ");
-        numPlayers = Integer.parseInt(scanner.nextLine());
-        for (int i = 0; i < numPlayers; i++) {
-            int pos = i + 1;
-            System.out.print("Name of "+pos+" player: ");
-            playersNames.add(scanner.nextLine());
-            System.out.print("Color of "+pos+" player: ");
-            playersColors.add(scanner.nextLine());
-        }
-        maxTurns = 30 * numPlayers;
-        ModelInterface model = new ModelInterface(numPlayers, playersNames, playersColors, maxTurns, numDice);
+        ModelInterface model;
+        Integer load = Integer.parseInt(scanner.nextLine());
+        if (load == 0) {
+            // get players (number, names)
+            System.out.print("Number of players: ");
+            numPlayers = Integer.parseInt(scanner.nextLine());
+            for (int i = 0; i < numPlayers; i++) {
+                int pos = i + 1;
+                System.out.print("Name of "+pos+" player: ");
+                playersNames.add(scanner.nextLine());
+                System.out.print("Color of "+pos+" player: ");
+                playersColors.add(scanner.nextLine());
+            }
+            maxTurns = 30 * numPlayers;
+            model = new ModelInterface(numPlayers, playersNames, playersColors, maxTurns, numDice);
 
-        // defining player order
-        System.out.println("----------");
-        System.out.println("Defining player order:");
-        ArrayList<Integer>results = new ArrayList<>();
-        for (int i = 0; i < numPlayers; i++) {
-            int result = model.totalDiceResult(model.rollDices());
-            System.out.println("Player "+playersNames.get(i)+": "+result);
-            results.add(result);
-        }
-        model.definePlayerOrder(results);
-        ArrayList<Integer> playersInOrder = model.getPlayersOrder();
-        System.out.print("Player order: ");
-        for (int i = 0; i < numPlayers; i++) {
-            Player player = model.getPlayerById(playersInOrder.get(i));
-            System.out.print(player.getName());
-            if (i < numPlayers - 1) {
-                System.out.print(", ");
+            // defining player order
+            System.out.println("----------");
+            System.out.println("Defining player order:");
+            ArrayList<Integer>results = new ArrayList<>();
+            for (int i = 0; i < numPlayers; i++) {
+                int result = model.totalDiceResult(model.rollDices());
+                System.out.println("Player "+playersNames.get(i)+": "+result);
+                results.add(result);
             }
-            else {
-                System.out.println("");
+            model.definePlayerOrder(results);
+            ArrayList<Integer> playersInOrder = model.getPlayersOrder();
+            System.out.print("Player order: ");
+            for (int i = 0; i < numPlayers; i++) {
+                Player player = model.getPlayerById(playersInOrder.get(i));
+                System.out.print(player.getName());
+                if (i < numPlayers - 1) {
+                    System.out.print(", ");
+                }
+                else {
+                    System.out.println("");
+                }
             }
         }
+        else {
+            model = ModelInterface.loadGame("previous_game.ser");
+        }
+        
+
 
 
         // game loop
@@ -163,6 +171,10 @@ public class Test {
                 }
                 else if (choice == 2) {
                     Aux.printAllProperties(model.getProperties());
+                }
+                // secret thid option no one needs to know
+                else if (choice == 3) {
+                    model.saveGame("previous_game.ser");
                 }
                 System.out.println("Choose an option: (0) go to next player, (1) print players, (2) print properties");
                 System.out.print("Choise: ");

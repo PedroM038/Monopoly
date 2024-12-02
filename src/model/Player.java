@@ -3,14 +3,15 @@
 import java.util.ArrayList;
 
 import assets.*;
+import java.io.*;
 
-public class Player {
+public class Player implements Serializable {
     private String name;
     private Integer id;
     private String color;
-    private int money;
+    private Integer money;
     private ArrayList<Property> properties;
-    private boolean isLocked;
+    private Boolean isLocked;
 
     public Player(String name, Integer id, String color, int initialMoney) {
         this.name = name;

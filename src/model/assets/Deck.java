@@ -1,15 +1,13 @@
 package assets;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Deck{
+public class Deck implements Serializable {
 
     private ArrayList<Card> cards;
-    private int numDrawnCards; 
+    private Integer numDrawnCards; 
 
     public Deck(){
         this.cards = new ArrayList<>();

@@ -2,17 +2,18 @@
 
 import assets.*;
 import java.util.ArrayList;
+import java.io.*;
 
 
-public class ModelInterface {
+public class ModelInterface implements Serializable {
     private ArrayList<Player> players;
     private Board board;
     private Deck deck;
     private Dice dice;
-    private int numDice;
+    private Integer numDice;
     private JailGuard guard;
-    private int maxTurns;
-    private int numTurns;
+    private Integer maxTurns;
+    private Integer numTurns;
     private ArrayList<Integer>playersOrder;
 
     private int nextPlayerPos;
@@ -178,6 +179,33 @@ public class ModelInterface {
 
     public ArrayList<Property> getProperties() {
         return this.board.getProperties();
+    }
+
+
+    // SAVE/LOAD games
+    public void saveGame(String filename) {
+        try{
+            FileOutputStream fileOutputStream = new FileOutputStream(filename);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream); 
+            objectOutputStream.writeObject(this);
+            objectOutputStream.close();
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public static ModelInterface loadGame (String filename) {
+        try {
+            ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(filename));
+            ModelInterface restored = (ModelInterface) objectInputStream.readObject();
+            objectInputStream.close();
+            return restored;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
 
