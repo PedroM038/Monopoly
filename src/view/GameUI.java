@@ -18,10 +18,9 @@ public class GameUI extends JFrame {
 
         this.setVisible(true);
     }
-
     private void initializeBoardPanel() {
         CustomBoardPanel boardPanel = new CustomBoardPanel();
-        boardPanel.setSize(1000, height);
+        boardPanel.setSize(1080, height);
         boardPanel.setLocation(0, 0);
         boardPanel.setBackground(Color.WHITE);
         boardPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -29,26 +28,6 @@ public class GameUI extends JFrame {
     }
     
     private void initializeControlPanel() {
-        JPanel turnPanel = new JPanel();
-        turnPanel.setBackground(Color.WHITE);
-        turnPanel.setSize(960, 450);
-        turnPanel.setLocation(960, 0);
-        turnPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        this.add(turnPanel);
-
-        JPanel spacePanel = new JPanel();
-        Color color = new Color(0, 100, 25, 150);
-        spacePanel.setBackground(color);
-        spacePanel.setSize(960, 450);
-        spacePanel.setLocation(960, 450);
-        spacePanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        this.add(spacePanel);
-
-        JPanel buttonsPanel = new JPanel();
-        buttonsPanel.setBackground(Color.WHITE);
-        buttonsPanel.setSize(960, 180);
-        buttonsPanel.setLocation(960, 900);
-        buttonsPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        this.add(buttonsPanel);
+        
     }
 }
