@@ -22,9 +22,8 @@ public class CustomBoardPanel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         drawBoard(g);
-        drawGridLines(g);
-        drawSpaceNumbers(g);
         drawAllImageSpace(g);
+        drawGridLines(g);
     }
 
     private void drawBoard(Graphics g) {
@@ -47,67 +46,36 @@ public class CustomBoardPanel extends JPanel {
         }
     }
 
-    private void drawSpaceNumbers(Graphics g) {
-        // Top row
-        drawSpaceRow(g, 0, SPACES_TOP, 20, 60, CELL_SIZE, 0);
-        
-        // Right column
-        drawSpaceRow(g, SPACES_TOP, SPACES_TOP + SPACES_RIGHT, 980, 160, 0, CELL_SIZE);
-        
-        // Bottom row (reverse)
-        drawSpaceRow(g, SPACES_TOP + SPACES_RIGHT, 
-                    SPACES_TOP + SPACES_RIGHT + SPACES_BOTTOM, 
-                    860, 1000, -CELL_SIZE, 0);
-        
-        // Left column (reverse)
-        drawSpaceRow(g, SPACES_TOP + SPACES_RIGHT + SPACES_BOTTOM,
-                    SPACES_TOP + SPACES_RIGHT + SPACES_BOTTOM + SPACES_LEFT,
-                    20, 880, 0, -CELL_SIZE);
+    private int getXSpace(int space) {
+        if (space < SPACES_TOP) {
+            return (space * CELL_SIZE);
+        } else if (space < SPACES_TOP + SPACES_RIGHT) {
+            return BOARD_SIZE - BOARD_MARGIN;
+        } else if (space < SPACES_TOP + SPACES_RIGHT + SPACES_BOTTOM) {
+            return BOARD_SIZE - 240 - ((space - SPACES_TOP - SPACES_RIGHT) * CELL_SIZE);
+        } else {
+            return 0;
+        }
     }
 
-    private void drawSpaceRow(Graphics g, int startSpace, int endSpace, 
-                            int startX, int startY, int deltaX, int deltaY) {
-        int x = startX;
-        int y = startY;
-        for (int i = startSpace; i < endSpace; i++) {
-            g.drawString("Espaço: " + i, x, y);
-            x += deltaX;
-            y += deltaY;
+    private int getYSpace(int space) {
+        if (space < SPACES_TOP) {
+            return 0;
+        } else if (space < SPACES_TOP + SPACES_RIGHT) {
+            return BOARD_MARGIN + ((space - SPACES_TOP) * CELL_SIZE);
+        } else if (space < SPACES_TOP + SPACES_RIGHT + SPACES_BOTTOM) {
+            return BOARD_SIZE - BOARD_MARGIN;
+        } else {
+            return BOARD_SIZE - 240 - ((space - SPACES_TOP - SPACES_RIGHT - SPACES_BOTTOM) * CELL_SIZE);
         }
     }
 
     private void drawAllImageSpace(Graphics g) {
-        drawImageSpace(g, 1, 0, 0);
-        drawImageSpace(g, 2, 120, 0);
-        drawImageSpace(g, 3, 240, 0);
-        drawImageSpace(g, 4, 360, 0);
-        drawImageSpace(g, 5, 480, 0);
-        drawImageSpace(g, 6, 600, 0);
-        drawImageSpace(g, 7, 720, 0);
-        drawImageSpace(g, 8, 840, 0);
-        drawImageSpace(g, 9, 960, 0);
-        drawImageSpace(g, 10, 960, 120);
-        drawImageSpace(g, 11, 960, 240);
-        drawImageSpace(g, 12, 960, 360);
-        drawImageSpace(g, 13, 960, 480);
-        drawImageSpace(g, 14, 960, 600);
-        drawImageSpace(g, 15, 960, 720);
-        drawImageSpace(g, 16, 960, 840);
-        drawImageSpace(g, 17, 960, 960);
-        drawImageSpace(g, 18, 840, 960);
-        drawImageSpace(g, 19, 720, 960);
-        drawImageSpace(g, 20, 600, 960);
-        drawImageSpace(g, 21, 480, 960);
-        drawImageSpace(g, 22, 360, 960);
-        drawImageSpace(g, 23, 240, 960);
-        drawImageSpace(g, 24, 120, 960);
-        drawImageSpace(g, 25, 0, 960);
-        drawImageSpace(g, 26, 0, 840);
-        drawImageSpace(g, 27, 0, 720);
-        drawImageSpace(g, 28, 0, 600);
-        drawImageSpace(g, 29, 0, 480);
-        drawImageSpace(g, 30, 0, 360);
-        drawImageSpace(g, 31, 0, 240);
+        for (int i = 0; i < 32; i++) {
+            int x = getXSpace(i);
+            int y = getYSpace(i);
+            drawImageSpace(g, i, x, y);
+        }
     }
 
     private void drawImageSpace(Graphics g, int spaceNumber, int x, int y) {
