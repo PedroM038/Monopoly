@@ -15,7 +15,7 @@ public class Info {
     public Integer spaceId;
     public Card card;
     public boolean gotThroughStart;
-    public ArrayList<String>possible_actions;
+    public ArrayList<String>possible_actions;  // buy, sell, buyHouse, bail
     public boolean gotLocked;
     public Integer numMoves;
 

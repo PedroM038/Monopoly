@@ -27,10 +27,6 @@ public class PlayerSpaceHandler {
         else if (space instanceof VacationSpace) {
             PlayerSpaceHandler.solveVacationSpace(player, (VacationSpace) space, info, model);
         }
-
-        if (player.getProperties().size() > 0) {
-            info.possible_actions.add("sell");
-        }
         return info; 
     }
 
@@ -63,8 +59,11 @@ public class PlayerSpaceHandler {
         if (ownerId == -1) {
             info.possible_actions.add("buy");
         }
-        else if (ownerId == player.getId() && !property.hasAllHouses()) {
-            info.possible_actions.add("buyHouse");
+        else if (ownerId == player.getId()) {
+            info.possible_actions.add("sell");
+            if (!property.hasAllHouses()) {
+                info.possible_actions.add("buyHouse");
+            }
         }
         else {
             Player owner = model.getPlayers().get(ownerId);
