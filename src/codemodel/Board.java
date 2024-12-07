@@ -24,14 +24,14 @@ public class Board implements Serializable {
             this.spaces.add(new Space());
         }
         this.spaces.set(prisonId, new PrisonSpace());
-        ArrayList<Property> properties = this.loadProperties("/../../assets/properties.txt");
+        ArrayList<Property> properties = this.loadProperties("assets/properties.txt");
         for (int i = 0; i < propertiesId.size(); i++) {
             this.spaces.set(propertiesId.get(i), new PropertySpace(properties.get(i)));
         }
         for (Integer i: cardsId) {
             this.spaces.set(i, new CardSpace());
         }
-        ArrayList<MoneySpace> moneySpaces = this.loadMoneySpace("/../../assets/money_spaces.txt");
+        ArrayList<MoneySpace> moneySpaces = this.loadMoneySpace("assets/money_spaces.txt");
         for (int i = 0; i < moneyId.size(); i++) {
             this.spaces.set(moneyId.get(i), moneySpaces.get(i));
         }

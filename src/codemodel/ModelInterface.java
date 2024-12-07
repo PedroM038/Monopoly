@@ -33,7 +33,7 @@ public class ModelInterface implements Serializable {
         this.board = new Board(GameConstants.BOARD_SIZE, numPlayers, GameConstants.PRISON_ID, 
             GameConstants.PROPERTIES_ID, GameConstants.CARDS_ID, GameConstants.MONEY_ID);
         this.deck = new Deck();
-        deck.loadCardsFromFile("/../../assets/deck/cards.txt");
+        deck.loadCardsFromFile("assets/deck/cards.txt");
         this.dice = new Dice(6);
         this.numDice = numDice;
 
