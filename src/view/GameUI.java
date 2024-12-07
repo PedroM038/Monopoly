@@ -7,27 +7,31 @@ public class GameUI extends JFrame {
 
     int height = 1080;
     int width = 1920;
+    private final CustomBoard boardPanel;
+    private final CustomControl controlPanel;
 
     public GameUI() {
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setTitle("Monopoly Game");
         this.setSize(width, height);
-        this.getContentPane().setBackground(java.awt.Color.WHITE);
-        this.setLayout(null);
-        initializeBoardPanel();
-        initializeControlPanel();
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLayout(new BorderLayout());
 
+        this.boardPanel = new CustomBoard();
+        add(boardPanel, BorderLayout.CENTER);
+
+        this.controlPanel = new CustomControl();
+        add(controlPanel, BorderLayout.EAST);
+
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
-    private void initializeBoardPanel() {
-        CustomBoardPanel boardPanel = new CustomBoardPanel();
-        boardPanel.setSize(1080, height);
-        boardPanel.setLocation(0, 0);
-        boardPanel.setBackground(Color.WHITE);
-        boardPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        this.add(boardPanel);
+
+    public CustomControl getControlPanel() {
+        return this.controlPanel;
     }
-    
-    private void initializeControlPanel() {
-        
+
+    public CustomBoard getBoardPanel() {
+        return this.boardPanel;
+
     }
 }
