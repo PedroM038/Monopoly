@@ -133,9 +133,11 @@ public class ModelInterface implements Serializable {
         return;
     }
 
-    // player in present turn sells desired property
-    public void sellProperty(Property property) {
+    // player in present turn sells the property he is in
+    public void sellProperty() {
         Player player = this.getNextPlayer();
+        PropertySpace space = (PropertySpace) this.getPlayerSpace(player);
+        Property property = space.getProperty();
         Bank.sellProperty(player, property);
     }
 
