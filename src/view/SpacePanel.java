@@ -11,10 +11,6 @@ public class SpacePanel extends JPanel {
     private final JPanel infoPanel;
     private final JPanel headerPanel;
     private final JLabel housePrice;
-    private final JLabel houseValue1;
-    private final JLabel houseValue2;
-    private final JLabel houseValue3;
-    private final JLabel houseValue4;
     private final JLabel mortgagePrice;
     private final JLabel rent;
     
@@ -47,17 +43,12 @@ public class SpacePanel extends JPanel {
         descriptionLabel = new JLabel("");
         priceLabel = new JLabel("");
         housePrice = new JLabel("");
-        houseValue1 = new JLabel("");
-        houseValue2 = new JLabel("");
-        houseValue3 = new JLabel("");
-        houseValue4 = new JLabel("");
         mortgagePrice = new JLabel("");
         rent = new JLabel("");
         
         // Set font for all labels
         Font labelFont = new Font("Verdana", Font.PLAIN, 16);
         JLabel[] labels = {nameSpaceLabel, descriptionLabel, priceLabel, housePrice,
-                          houseValue1, houseValue2, houseValue3, houseValue4,
                           mortgagePrice, rent};
         
         for (JLabel label : labels) {
@@ -80,10 +71,6 @@ public class SpacePanel extends JPanel {
         descriptionLabel.setText("Description: " + description);
         priceLabel.setText("PRICE: $" + price);
         housePrice.setText("HOUSE PRICE: $" + priceHouse);
-        houseValue1.setText("1 HOUSE: $" + rentPrice);
-        houseValue2.setText("2 HOUSES: $" + (rentPrice * 2));
-        houseValue3.setText("3 HOUSES: $" + (rentPrice * 3));
-        houseValue4.setText("4 HOUSES: $" + (rentPrice * 4));
         mortgagePrice.setText("MORTGAGE: $" + mortgage);
     
         // Adiciona as informações ao painel
@@ -91,10 +78,6 @@ public class SpacePanel extends JPanel {
         infoPanel.add(descriptionLabel);
         infoPanel.add(priceLabel);
         infoPanel.add(housePrice);
-        infoPanel.add(houseValue1);
-        infoPanel.add(houseValue2);
-        infoPanel.add(houseValue3);
-        infoPanel.add(houseValue4);
         infoPanel.add(mortgagePrice);
     
         // Atualiza o layout

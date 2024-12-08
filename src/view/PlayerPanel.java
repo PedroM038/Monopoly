@@ -61,9 +61,16 @@ public class PlayerPanel extends JPanel{
     
     public void updatePlayerInfo(int money, int numProperties, String name, String playerColor) {
         try {
-            ImageIcon icon = new ImageIcon(getClass().getResource("assets/"+playerColor+".png"));
-            Image img = icon.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
-            this.playerImage.setIcon(new ImageIcon(img));
+            if(getClass().getResource("assets/"+playerColor+".png") != null) {
+                ImageIcon icon = new ImageIcon(getClass().getResource("assets/"+playerColor+".png"));
+                Image img = icon.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+                this.playerImage.setIcon(new ImageIcon(img));
+            }
+            else {
+                ImageIcon icon = new ImageIcon(getClass().getResource("assets/white.png"));
+                Image img = icon.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+                this.playerImage.setIcon(new ImageIcon(img));
+            }
         } catch (Exception e) {
             System.err.println("Error loading player image: " + e.getMessage());
         }

@@ -21,8 +21,7 @@ public class ModelInterface implements Serializable {
     private JailGuard guard;
     private Integer maxTurns;
     private Integer numTurns;
-    private ArrayList<Integer>playersOrder;
-
+    private ArrayList<Integer>playersOrder = new ArrayList<Integer>();
     private int nextPlayerPos;
 
     public ModelInterface(int numPlayers, ArrayList<String> playersName, ArrayList<String> playersColors, int maxTurns, int numDice) {
@@ -43,7 +42,6 @@ public class ModelInterface implements Serializable {
         this.numTurns = 0;
 
         this.playersOrder = new ArrayList<Integer>();
-        this.nextPlayerPos = 0;
     }
 
     public ArrayList<Integer> rollDices() {
@@ -220,7 +218,7 @@ public class ModelInterface implements Serializable {
     public ArrayList<Player> getPlayers() {
         return this.players;
     }
-    
+
     public Board getBoard() {
         return this.board;
     }
@@ -260,5 +258,57 @@ public class ModelInterface implements Serializable {
     public Player getNextPlayer() {
         return this.players.get(this.playersOrder.get(this.nextPlayerPos));
     }
+    
+    public boolean isOrderDefined() {
+        return !this.playersOrder.isEmpty();
+    }
+    public int getNumPlayers() {
+        return this.players.size();
+    }
+    public int getPlayerSpaceId(Player player) {
+        return this.board.getPlayerPos(player);
+    }
 
+    public ArrayList<Integer> getPlayersPositions() {
+        ArrayList<Integer> positions = new ArrayList<>();
+        for (Player player : this.players) {
+            positions.add(this.board.getPlayerPos(player));
+        }
+        return positions;
+    }
+
+    public ArrayList<String> getPlayersColors() {
+        ArrayList<String> colors = new ArrayList<>();
+        for (Player player : this.players) {
+            colors.add(player.getColor());
+        }
+        return colors;
+    }
+
+    public ArrayList<Integer> getPlayersSpaces(){
+        ArrayList<Integer> spaces = new ArrayList<>();
+        for (Player player : this.players) {
+            spaces.add(this.board.getPlayerPos(player));
+        }
+        return spaces;
+    }
+
+    public ArrayList<Integer> getNumHouseinAllSpaces(){
+        ArrayList<Integer> numHouse = new ArrayList<>();
+        for (int i = 0; i < this.board.getBoardSize(); i++) {
+            Space space = this.board.getSpace(i);
+            if (space instanceof PropertySpace) {
+                PropertySpace tempSpace = (PropertySpace) space;
+                numHouse.add(tempSpace.getProperty().getNumHouses());
+            }
+            else {
+                numHouse.add(0);
+            }
+        }
+        return numHouse;
+    }
+
+    /*public Property getPropertyById(int id) {
+        return this.board.getPropertyById(id);
+    }*/
 }

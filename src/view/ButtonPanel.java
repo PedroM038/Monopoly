@@ -105,4 +105,25 @@ public class ButtonPanel extends JPanel {
             case END -> endTurnButton.setEnabled(enabled);
         }
     }
+
+    public void removeActionListenerFromButton(ButtonName button) {
+
+        JButton btn = getButton(button);
+        for (ActionListener al : btn.getActionListeners()) {
+            btn.removeActionListener(al);
+        }
+    }
+
+    private JButton getButton(ButtonName buttonName) {
+        return switch (buttonName) {
+            case BUY -> buyButton;
+            case SELL -> sellButton;
+            case ROLL -> rollDiceButton;
+            case END -> endTurnButton;
+        };
+    }
+
+    public JButton getRollDiceButton() {
+        return rollDiceButton;
+    }
 }

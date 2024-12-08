@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 public class SpaceBoardUI extends JPanel{
-    private ArrayList<Integer> houses;
+    private ArrayList<Integer> houses = new ArrayList<>();
+    private boolean Valid = true;
     public SpaceBoardUI() {
     }
 
@@ -36,7 +37,7 @@ public class SpaceBoardUI extends JPanel{
             }
         }
 
-        drawAllHouses(g);
+        if (!houses.isEmpty()) drawAllHouses(g);
     }
 
     public int getXSpace(int space) {
@@ -65,6 +66,7 @@ public class SpaceBoardUI extends JPanel{
 
     public void drawAllHouses(ArrayList<Integer> houses) {
         this.houses = houses;
+        this.Valid = true;
         repaint();
     }
 

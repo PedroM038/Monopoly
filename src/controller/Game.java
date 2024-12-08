@@ -1,86 +1,205 @@
 package controller;
-
+//atualizar os updatesUI e draw
 import codemodel.*;
+import codemodel.assets.*;
 import java.util.*;
 import view.*;
 
 public class Game {
+    private ModelInterface model;
+    private CustomControl controlUI;
+    private GameUI gameUI;
+    private CustomBoard boardUI;
+    private ArrayList<Integer> playersInOrder = new ArrayList<>();
+    private ArrayList<String> colors = new ArrayList<>();
+    private int numPlayers;
+
     public Game() {
-        Scanner scanner = new Scanner(System.in);
-        ArrayList<String> playersNames = new ArrayList<>();
-        ArrayList<String> playersColors = new ArrayList<>();
-        ArrayList<Integer> houses = new ArrayList<>();
-        for (int i = 0; i < 32; i++) {
-            houses.add(0);
-        }
-        int numPlayers;
-        int choice;
-        int maxTurns;
-        int numDice = 2;
-        ModelInterface model;
+        ArrayList<String> playersNames;
+        ArrayList<String> playersColors;
+        ArrayList<Player> players = new ArrayList<>();
+        ArrayList<Integer> spaces = new ArrayList<>();
+
         MonopolySetup setup = new MonopolySetup();
 
         numPlayers = setup.getNumberOfPlayers();
-        choice = setup.getChoice();
+        int choice = setup.getChoice();
         playersNames = setup.getPlayerNames();
         playersColors = setup.getPlayerColors();
 
-        GameUI gameUI = new GameUI();
-        CustomBoard boardUI = gameUI.getBoardPanel();
-        CustomControl controlUI = gameUI.getControlPanel();
-        boardUI.drawAllHouses(houses);
+        gameUI = new GameUI();
+        boardUI = gameUI.getBoardPanel();
+        controlUI = gameUI.getControlPanel();
 
-        // choice == 1 new game
-        // choice == 2 load game
-        if (choice == 1) {
-            maxTurns = 30 * numPlayers;
-            model = new ModelInterface(numPlayers, playersNames, playersColors, maxTurns, numDice);
-        
-            // Define player order through dice rolling
-            ArrayList<Integer> results = new ArrayList<>();
-            final int[] currentPlayer = {0}; // Track current player rolling dice
-            
-            // Enable only roll button initially
-            controlUI.getButtonPanel().setButtonEnabled(ButtonPanel.ButtonName.BUY, false);
-            controlUI.getButtonPanel().setButtonEnabled(ButtonPanel.ButtonName.SELL, false);
-            controlUI.getButtonPanel().setButtonEnabled(ButtonPanel.ButtonName.END, false);
-            controlUI.getButtonPanel().setButtonEnabled(ButtonPanel.ButtonName.ROLL, true);
-        
-            // Add roll dice listener
-            controlUI.getButtonPanel().setRollDiceListener(e -> {
-                if (currentPlayer[0] < numPlayers) {
-                    // Roll dice and get results
-                    ArrayList<Integer> diceResults = model.rollDices();
-                    int result = model.totalDiceResult(diceResults);
-                    
-                    // Update dice images in UI
-                    controlUI.getButtonPanel().updateDiceImages(diceResults.get(0), diceResults.get(1));
-                    
-                    // Store result and update player info
-                    results.add(result);                    
-                    currentPlayer[0]++;
-                    
-                    // When all players have rolled
-                    if (currentPlayer[0] == numPlayers) {
-                        // Define final player order
-                        model.definePlayerOrder(results);
-                        ArrayList<Integer> playersInOrder = model.getPlayersOrder();
-                        
-                        // Disable roll button after all players have rolled
-                        controlUI.getButtonPanel().setButtonEnabled(ButtonPanel.ButtonName.ROLL, false);
-                        
-                        // Print final order
-                        for (int i = 0; i < numPlayers; i++) {
-                            Player player = model.getPlayerById(playersInOrder.get(i));
-                            System.out.println("Order " + (i+1) + ": " + player.getName());
-                        }
-                    }
-                }
-            });
-        }
-        
-        else {
+        if (choice == 1) { // New Game
+            int maxTurns = 100 * numPlayers;
+            model = new ModelInterface(numPlayers, playersNames, playersColors, maxTurns, 2);
+            boardUI.drawAllPlayer(model.getPlayersColors(), model.getPlayersPositions());
+            boardUI.drawAllHouses(model.getNumHouseinAllSpaces());
+            setupInitialRoll(players, spaces);
+        } else { // Load Game
             model = ModelInterface.loadGame("previous_game.ser");
+            playersInOrder = model.getPlayersOrder();
+            startGameLoop();
         }
+    }
+
+    private void setupInitialRoll(ArrayList<Player> players, ArrayList<Integer> spaces) {
+        ArrayList<Integer> results = new ArrayList<>();
+        final int[] currentPlayer = {0};
+
+        disableAllButtonsExcept(ButtonPanel.ButtonName.ROLL);
+
+        controlUI.getButtonPanel().setRollDiceListener(e -> {
+            if (currentPlayer[0] < numPlayers) {
+                Player player = model.getPlayerById(currentPlayer[0]);
+                controlUI.updateInfoPlayer(player.getMoney(), player.getProperties().size(), player.getName(), player.getColor());
+                ArrayList<Integer> diceResults = model.rollDices();
+                int result = model.totalDiceResult(diceResults);
+
+                controlUI.getButtonPanel().updateDiceImages(diceResults.get(0), diceResults.get(1));
+                results.add(result);
+                currentPlayer[0]++;
+                
+                if (currentPlayer[0] == numPlayers) {
+                    model.definePlayerOrder(results);
+                    playersInOrder = model.getPlayersOrder();
+                    
+                    for (int i = 0; i < numPlayers; i++) {
+                        Player p = model.getPlayerById(playersInOrder.get(i));
+                        Info inf = new Info(p);
+                        players.add(p);
+                        colors.add(p.getColor());
+                        spaces.add(inf.spaceId);
+                    }
+                    
+                    disableAllButtonsExcept(null);
+                    controlUI.getButtonPanel().removeActionListenerFromButton(ButtonPanel.ButtonName.ROLL);
+                    startGameLoop();
+                }
+            }
+        });
+    }
+
+    private void startGameLoop() {
+        setupNextTurn();
+    }
+
+    private void setupNextTurn() {
+        if (model.isFinished()) {
+            endGame();
+            return;
+        }
+
+        Player player = model.getNextPlayer();
+        controlUI.updateInfoPlayer(player.getMoney(), player.getProperties().size(), player.getName(), player.getColor());
+        disableAllButtonsExcept(ButtonPanel.ButtonName.ROLL);
+
+        controlUI.getButtonPanel().setRollDiceListener(e -> handlePlayerTurn());
+    }
+
+    private void handlePlayerTurn() {
+        ArrayList<Integer> diceResults = model.rollDices();
+        Info info = model.moveNextPlayer(diceResults);
+
+        controlUI.getButtonPanel().updateDiceImages(diceResults.get(0), diceResults.get(1));
+        boardUI.drawAllPlayer(model.getPlayersColors(), model.getPlayersPositions());
+        boardUI.drawAllHouses(model.getNumHouseinAllSpaces());
+        updateSpaceInfo(info);
+        controlUI.updateInfoPlayer(info.player.getMoney(), info.player.getProperties().size(), info.player.getName(), info.player.getColor());
+
+        disableButton(ButtonPanel.ButtonName.ROLL);
+        enableButton(ButtonPanel.ButtonName.END);
+
+        setupActionButtons(info);
+    }
+
+    private void updateSpaceInfo(Info info) {
+        if (info.space instanceof PropertySpace propertySpace) {
+            Property property = propertySpace.getProperty();
+            controlUI.updateInfoSpace(
+                "Property",
+                property.getName(),
+                property.getPrice(),
+                info.spaceId,
+                property.getHousePrice(),
+                property.getBaseRent(),
+                property.getMortgagePrice()
+            );
+        } else if (info.space instanceof PrisonSpace) {
+            controlUI.updateInfoSpace("Jail", "You are in jail", info.spaceId);
+        } else if (info.space instanceof CardSpace) {
+            controlUI.updateInfoSpace("Card", info.card.getDescription(), info.card.getAmount(), info.spaceId);
+        } else if (info.space instanceof MoneySpace){
+            controlUI.updateInfoSpace("Money", info.space.getDescription(), info.spaceId);
+        } 
+        else {
+            controlUI.updateInfoSpace(" Empty Space, Sorry", "Why you look description in Empty Space?", info.spaceId);
+        }
+    }
+
+    private void setupActionButtons(Info info) {
+        for (String action : info.possible_actions) {
+            switch (action) {
+                case "buy" -> enableButton(ButtonPanel.ButtonName.BUY);
+                case "sell" -> enableButton(ButtonPanel.ButtonName.SELL);
+                case "buyHouse" -> enableButton(ButtonPanel.ButtonName.BUY);
+                case "bail" -> enableButton(ButtonPanel.ButtonName.BUY);
+            }
+        }
+
+        controlUI.getButtonPanel().setBuyListener(e -> {
+            if (info.possible_actions.contains("buy")) {
+                model.buyProperty();
+            } else if (info.possible_actions.contains("buyHouse")) {
+                model.buyHouse();
+            } else if (info.possible_actions.contains("bail")) {
+                model.bailFromJail();
+            }
+            disableButton(ButtonPanel.ButtonName.BUY);
+        });
+
+        controlUI.getButtonPanel().setSellListener(e -> {
+            if (info.possible_actions.contains("sell")) {
+                /*model.sellProperty(null);*/
+            }
+            disableButton(ButtonPanel.ButtonName.SELL);
+        });
+
+        controlUI.getButtonPanel().setSellListener(e -> {
+            if (info.possible_actions.contains("sell")) {
+                model.sellProperty(null);
+            }
+            disableButton(ButtonPanel.ButtonName.SELL);
+        });
+
+        controlUI.getButtonPanel().setEndTurnListener(e -> {
+            model.goToNextPlayer();
+            controlUI.getButtonPanel().removeActionListenerFromButton(ButtonPanel.ButtonName.ROLL);
+            controlUI.getButtonPanel().removeActionListenerFromButton(ButtonPanel.ButtonName.BUY);
+            controlUI.getButtonPanel().removeActionListenerFromButton(ButtonPanel.ButtonName.SELL);
+            controlUI.getButtonPanel().removeActionListenerFromButton(ButtonPanel.ButtonName.END);
+            setupNextTurn();
+        });
+    }
+
+    private void disableAllButtonsExcept(ButtonPanel.ButtonName buttonToEnable) {
+        for (ButtonPanel.ButtonName button : ButtonPanel.ButtonName.values()) {
+            controlUI.getButtonPanel().setButtonEnabled(button, button == buttonToEnable);
+        }
+    }
+
+    private void enableButton(ButtonPanel.ButtonName button) {
+        controlUI.getButtonPanel().setButtonEnabled(button, true);
+    }
+
+    private void disableButton(ButtonPanel.ButtonName button) {
+        controlUI.getButtonPanel().setButtonEnabled(button, false);
+    }
+
+    private void endGame() {
+        System.out.println("Game over!");
+        gameUI.dispose();
+        System.exit(0);
     }
 }
