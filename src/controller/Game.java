@@ -1,5 +1,4 @@
 package controller;
-//atualizar os updatesUI e draw
 import codemodel.*;
 import codemodel.assets.*;
 import java.util.*;
@@ -161,14 +160,7 @@ public class Game {
 
         controlUI.getButtonPanel().setSellListener(e -> {
             if (info.possible_actions.contains("sell")) {
-                /*model.sellProperty(null);*/
-            }
-            disableButton(ButtonPanel.ButtonName.SELL);
-        });
-
-        controlUI.getButtonPanel().setSellListener(e -> {
-            if (info.possible_actions.contains("sell")) {
-                model.sellProperty(null);
+                model.sellProperty();
             }
             disableButton(ButtonPanel.ButtonName.SELL);
         });
@@ -179,6 +171,7 @@ public class Game {
             controlUI.getButtonPanel().removeActionListenerFromButton(ButtonPanel.ButtonName.BUY);
             controlUI.getButtonPanel().removeActionListenerFromButton(ButtonPanel.ButtonName.SELL);
             controlUI.getButtonPanel().removeActionListenerFromButton(ButtonPanel.ButtonName.END);
+            model.saveGame("previous_game.ser");
             setupNextTurn();
         });
     }

@@ -30,15 +30,6 @@ make run
 # Clean build files
 make clean
 ```
-
-## Game Components
-
-- **Board**: Contains various spaces like properties, card spaces, and special locations
-- **Players**: Can own properties, manage money, and move around the board
-- **Cards**: Random event cards that affect gameplay
-- **Dice**: Used for movement
-- **Properties**: Various UFPR buildings and locations that can be purchased
-
 ## Project Structure
 
 ```

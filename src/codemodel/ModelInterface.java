@@ -84,12 +84,12 @@ public class ModelInterface implements Serializable {
             info.space = this.getPlayerSpace(player);
             info.spaceId = this.board.getPlayerPos(player);
             if (this.guard.freePlayerWithDice(player, diceResults.get(0), diceResults.get(1))) {
-                return info;
-            }
-            this.guard.reducePenalty(player);
-            if (this.guard.canBail(player)) {
                 info.possible_actions.add("bail");
             }
+            else if (this.guard.canBail(player)) {
+                info.possible_actions.add("bail");
+            }
+            this.guard.reducePenalty(player);
             return info;
         }
         int numMoves = this.totalDiceResult(diceResults);

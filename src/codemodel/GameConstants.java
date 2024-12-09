@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class GameConstants {
-    public static Integer PLAYER_INITIAL_MONEY = 20000; //2558;
+    public static Integer PLAYER_INITIAL_MONEY = 2558;
     public static Integer JAIL_BAIL_VALUE = 50;
 
     // board related
