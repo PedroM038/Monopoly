@@ -143,7 +143,7 @@ public class Game {
                 case "buy" -> enableButton(ButtonPanel.ButtonName.BUY);
                 case "sell" -> enableButton(ButtonPanel.ButtonName.SELL);
                 case "buyHouse" -> enableButton(ButtonPanel.ButtonName.BUY);
-                case "bail" -> enableButton(ButtonPanel.ButtonName.BUY);
+                case "bail" -> enableButton(ButtonPanel.ButtonName.BAIL);
             }
         }
 
@@ -152,10 +152,15 @@ public class Game {
                 model.buyProperty();
             } else if (info.possible_actions.contains("buyHouse")) {
                 model.buyHouse();
-            } else if (info.possible_actions.contains("bail")) {
+            } 
+            disableButton(ButtonPanel.ButtonName.BUY);
+        });
+
+        controlUI.getButtonPanel().setBailListener(e -> {
+            if (info.possible_actions.contains("bail")) {
                 model.bailFromJail();
             }
-            disableButton(ButtonPanel.ButtonName.BUY);
+            disableButton(ButtonPanel.ButtonName.BAIL);
         });
 
         controlUI.getButtonPanel().setSellListener(e -> {
@@ -170,6 +175,7 @@ public class Game {
             controlUI.getButtonPanel().removeActionListenerFromButton(ButtonPanel.ButtonName.ROLL);
             controlUI.getButtonPanel().removeActionListenerFromButton(ButtonPanel.ButtonName.BUY);
             controlUI.getButtonPanel().removeActionListenerFromButton(ButtonPanel.ButtonName.SELL);
+            controlUI.getButtonPanel().removeActionListenerFromButton(ButtonPanel.ButtonName.BAIL);
             controlUI.getButtonPanel().removeActionListenerFromButton(ButtonPanel.ButtonName.END);
             model.saveGame("previous_game.ser");
             setupNextTurn();

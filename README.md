@@ -44,5 +44,7 @@ make clean
 ```
 
 ## Authors
-
+Pedro Henrique Marques de Lima (GRR 20235166)
+Helen Kaori Iijima (GRR 20235160)
+Roberto Sprengel Minozzo Tomchak (GRR 20232369)
 ...

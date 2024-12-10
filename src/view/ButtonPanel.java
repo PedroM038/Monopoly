@@ -3,10 +3,9 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-
 public class ButtonPanel extends JPanel {
 
-    private final JButton buyButton, sellButton, rollDiceButton, endTurnButton;
+    private final JButton buyButton, sellButton, rollDiceButton, endTurnButton, bailButton;
     private final JLabel dice1Label, dice2Label;
     
     public ButtonPanel() {
@@ -19,11 +18,14 @@ public class ButtonPanel extends JPanel {
         sellButton.setBackground(Color.RED);
         rollDiceButton = new JButton("Roll Dice");
         endTurnButton = new JButton("End Turn");
+        bailButton = new JButton("Bail");
+        bailButton.setBackground(Color.MAGENTA);
 
         buyButton.setActionCommand("BUY");
         sellButton.setActionCommand("SELL");
         rollDiceButton.setActionCommand("ROLL");
         endTurnButton.setActionCommand("END");
+        bailButton.setActionCommand("BAIL");
 
         dice1Label = new JLabel();
         dice2Label = new JLabel();
@@ -59,12 +61,16 @@ public class ButtonPanel extends JPanel {
 
         gbc.gridy = 1;
         add(sellButton, gbc);
+
+        gbc.gridx = 3; gbc.gridy = 2;
+        add(bailButton, gbc);
+
         ImageIcon icon1 = new ImageIcon(getClass().getResource("assets/dice" + 6 + ".png"));
-            ImageIcon icon2 = new ImageIcon(getClass().getResource("assets/dice" + 6 + ".png"));
-            Image img1 = icon1.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-            Image img2 = icon2.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-            this.dice1Label.setIcon(new ImageIcon(img1));
-            this.dice2Label.setIcon(new ImageIcon(img2));
+        ImageIcon icon2 = new ImageIcon(getClass().getResource("assets/dice" + 6 + ".png"));
+        Image img1 = icon1.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        Image img2 = icon2.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        this.dice1Label.setIcon(new ImageIcon(img1));
+        this.dice2Label.setIcon(new ImageIcon(img2));
     }
     
     public void setBuyListener(ActionListener listener) {
@@ -82,19 +88,23 @@ public class ButtonPanel extends JPanel {
     public void setEndTurnListener(ActionListener listener) {
         endTurnButton.addActionListener(listener);
     }
+
+    public void setBailListener(ActionListener listener) {
+        bailButton.addActionListener(listener);
+    }
     
     public void updateDiceImages(int dice1Value, int dice2Value) {
-            ImageIcon icon1 = new ImageIcon(getClass().getResource("assets/dice" + dice1Value + ".png"));
-            ImageIcon icon2 = new ImageIcon(getClass().getResource("assets/dice" + dice2Value + ".png"));
-            Image img1 = icon1.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-            Image img2 = icon2.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-            this.dice1Label.setIcon(new ImageIcon(img1));
-            this.dice2Label.setIcon(new ImageIcon(img2));
-            repaint();
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("assets/dice" + dice1Value + ".png"));
+        ImageIcon icon2 = new ImageIcon(getClass().getResource("assets/dice" + dice2Value + ".png"));
+        Image img1 = icon1.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        Image img2 = icon2.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        this.dice1Label.setIcon(new ImageIcon(img1));
+        this.dice2Label.setIcon(new ImageIcon(img2));
+        repaint();
     }
 
     public enum ButtonName {
-        BUY, SELL, ROLL, END
+        BUY, SELL, ROLL, END, BAIL
     }
 
     public void setButtonEnabled(ButtonName buttonName, boolean enabled) {
@@ -103,11 +113,11 @@ public class ButtonPanel extends JPanel {
             case SELL -> sellButton.setEnabled(enabled);
             case ROLL -> rollDiceButton.setEnabled(enabled);
             case END -> endTurnButton.setEnabled(enabled);
+            case BAIL -> bailButton.setEnabled(enabled);
         }
     }
 
     public void removeActionListenerFromButton(ButtonName button) {
-
         JButton btn = getButton(button);
         for (ActionListener al : btn.getActionListeners()) {
             btn.removeActionListener(al);
@@ -120,6 +130,7 @@ public class ButtonPanel extends JPanel {
             case SELL -> sellButton;
             case ROLL -> rollDiceButton;
             case END -> endTurnButton;
+            case BAIL -> bailButton;
         };
     }
 

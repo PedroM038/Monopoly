@@ -54,10 +54,11 @@ public class PlayerBoardUI extends JPanel {
     private Color getColorFromString(String color) {
         return switch (color.toLowerCase()) {
             case "blue" -> Color.BLUE;
-            case "yellow" -> Color.YELLOW;
+            case "black" -> Color.BLACK;
             case "white" -> Color.WHITE;
             case "red" -> Color.RED;
             case "green" -> Color.GREEN;
+            case "purple" -> new Color(128, 0, 128);
             default -> Color.GRAY;
         };
     }

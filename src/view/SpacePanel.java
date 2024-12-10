@@ -61,69 +61,53 @@ public class SpacePanel extends JPanel {
     }
     
     public void updateSpaceInfo(String name, String description, int price, int numSpace, int priceHouse, int rentPrice, int mortgage) {
-        resetInfoPanel(); // Limpa o painel antes de adicionar as novas informações
-    
-        // Atualiza a imagem do espaço
+        resetInfoPanel(); 
         updateSpaceImage(numSpace);
-    
-        // Atualiza informações específicas para propriedades
         nameSpaceLabel.setText("Name: " + name);
         descriptionLabel.setText("Description: " + description);
         priceLabel.setText("PRICE: $" + price);
         housePrice.setText("HOUSE PRICE: $" + priceHouse);
         mortgagePrice.setText("MORTGAGE: $" + mortgage);
     
-        // Adiciona as informações ao painel
         infoPanel.add(nameSpaceLabel);
         infoPanel.add(descriptionLabel);
         infoPanel.add(priceLabel);
         infoPanel.add(housePrice);
         infoPanel.add(mortgagePrice);
     
-        // Atualiza o layout
         refreshPanels();
     }
     
     public void updateSpaceInfo(String name, String description, int price, int numSpace) {
-        resetInfoPanel(); // Limpa o painel antes de adicionar as novas informações
-    
-        // Atualiza a imagem do espaço
+        resetInfoPanel();
         updateSpaceImage(numSpace);
     
-        // Atualiza informações gerais
         nameSpaceLabel.setText("Name: " + name);
         descriptionLabel.setText("Description: " + description);
         priceLabel.setText("PRICE: $" + price);
     
-        // Adiciona as informações ao painel
         infoPanel.add(nameSpaceLabel);
         infoPanel.add(descriptionLabel);
         infoPanel.add(priceLabel);
     
-        // Atualiza o layout
         refreshPanels();
     }
     
     public void updateSpaceInfo(String name, String description, int numSpace) {
-        resetInfoPanel(); // Limpa o painel antes de adicionar as novas informações
-    
-        // Atualiza a imagem do espaço
+        resetInfoPanel();
         updateSpaceImage(numSpace);
     
-        // Atualiza informações específicas para espaços simples
         nameSpaceLabel.setText("Name: " + name);
         descriptionLabel.setText("Description: " + description);
     
-        // Adiciona as informações ao painel
         infoPanel.add(nameSpaceLabel);
         infoPanel.add(descriptionLabel);
     
-        // Atualiza o layout
         refreshPanels();
     }
     
     private void resetInfoPanel() {
-        infoPanel.removeAll(); // Remove todos os componentes do painel
+        infoPanel.removeAll(); 
     }
     
     private void refreshPanels() {
