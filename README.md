@@ -42,6 +42,9 @@ make clean
 ├── assets/             # Game data files
 └── Makefile           # Build configuration
 ```
+## Note 
+The game is implemented in a fixed full HD resolution. For smaller resolutions, 
+the scaling of the elements will probably be out of scale.
 
 ## Authors
 Pedro Henrique Marques de Lima (GRR 20235166)
